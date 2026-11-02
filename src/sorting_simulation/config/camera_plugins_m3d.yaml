@@ -1,0 +1,27 @@
+/**:
+  ros__parameters:
+    mujoco_plugins:
+      contact_monitor:
+        type: sorting_simulation/ContactMonitor
+      conveyor_transport:
+        type: sorting_simulation/ConveyorPlugin
+      camera_plugin:
+        type: mujoco_ros2_control_plugins/CameraPlugin
+        camera_publish_rate: 20.0
+        static_overview:
+          policy: disabled
+        overhead:
+          policy: disabled
+          frame_name: overhead_camera_optical_frame
+          info_topic: /camera/overhead/camera_info
+          image_topic: /camera/overhead/image_raw
+          depth_topic: /camera/overhead/depth_unused
+        wrist:
+          policy: streaming
+          frame_name: wrist_camera_optical_frame
+          info_topic: /camera/wrist/camera_info
+          image_topic: /camera/wrist/image_raw
+          depth_topic: /camera/wrist/depth_unused
+      camera_evidence:
+        type: sorting_simulation/CameraEvidence
+        enable_evaluator: false

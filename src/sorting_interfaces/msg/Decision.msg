@@ -1,0 +1,15 @@
+std_msgs/Header header
+uint64 episode_id
+uint64 track_id
+string action
+string selected_view
+string class_id
+string proposed_bin
+float64 confidence
+float64[] class_probabilities
+builtin_interfaces/Time evidence_capture_time
+builtin_interfaces/Time deadline
+float64 remaining_time_s
+float64 estimated_service_time_s
+string reason
+string model_sha256

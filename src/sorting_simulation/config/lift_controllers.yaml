@@ -1,0 +1,10 @@
+panda_arm_controller:
+  ros__parameters:
+    interpolate_from_desired_state: true
+
+panda_hand_controller:
+  ros__parameters:
+    allow_stalling: true
+    goal_tolerance: 0.0005
+    stall_velocity_threshold: 0.001
+    stall_timeout: 1.0

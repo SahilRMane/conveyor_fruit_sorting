@@ -1,0 +1,47 @@
+checkpoint: M4C
+scope: moving inspection and deadline proposals; physical pickup disabled
+belt_speed_m_s: 0.001
+upstream_x_m: 0.46
+late_x_m: 0.73
+assess_trigger_x_m: 0.52
+exit_x_m: 0.75
+camera_rate_hz: 25.0
+capture_period_budget_s: 0.04
+capture_gap_jitter_s: 0.005
+missing_capture_reserve: 1
+timing_probe_sim_s: 10.0
+timing_probe_wall_s: 20.0
+overhead_resolution: [320, 240]
+overhead_start_maximum_capture_age_s: 0.075
+overhead_start_minimum_captures: 3
+delivery_budget_s: 0.05
+callback_budget_s: 0.01
+maximum_capture_age_s: 0.15
+maximum_source_wall_age_s: 0.5
+maximum_tracking_gap_s: 0.3
+maximum_localization_error_m: 0.002
+maximum_velocity_error_m_s: 0.002
+maximum_capture_binding_error_m: 0.003
+maximum_pair_render_p95_wall_s: 0.035
+maximum_policy_sim_s: 120.0
+maximum_policy_wall_s: 180.0
+entry_wait_sim_s: 75.0
+entry_wait_wall_s: 100.0
+capture_budget_s: 1.0
+cost_scale: 1.25
+cost_addition_s: 0.5
+# This is an allocation for the next checkpoint, not a measured pickup promise.
+approach_allocation_s: 8.0
+close_s: 0.8
+margin_s: 2.5
+maximum_horizon_s: 90.0
+near_zero_speed_m_s: 0.001
+uncertainty_sigma: 3.0
+acceptance_confidence: 0.8
+inspection_view: inspect_left
+class_ids: [red_fruit, green_fruit]
+bins: {red_fruit: bin_a, green_fruit: bin_b}
+classification_x_ranges:
+  assess: [0.52, 0.55]
+  inspect_left: [0.52, 0.57]
+pass_observation_sim_s: 2.0

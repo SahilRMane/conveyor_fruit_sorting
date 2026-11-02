@@ -1,0 +1,11 @@
+# Owner must be HOLD, PLANNED or SERVO. HOLD does not need a deadline.
+string owner
+# Simulation-time deadline. A new owner receives a new epoch.
+builtin_interfaces/Time deadline
+# Matches the installed MoveIt Servo service: 0=JOINT_JOG, 1=TWIST.
+uint8 servo_command_type
+---
+bool success
+uint64 epoch
+string owner
+string reason

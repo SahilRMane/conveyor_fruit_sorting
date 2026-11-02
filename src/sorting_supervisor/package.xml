@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>sorting_supervisor</name><version>0.1.0</version>
+  <description>Bounded active inspection for the conveyor sorting project.</description>
+  <maintainer email="sahilrmane1@gmail.com">smane</maintainer><license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>mujoco_vendor</depend><depend>yaml_cpp_vendor</depend>
+  <depend>moveit_core</depend><depend>rclcpp</depend><depend>moveit_msgs</depend>
+  <depend>sorting_simulation</depend><depend>sorting_control</depend><depend>sorting_perception</depend>
+  <build_depend>eigen</build_depend><build_depend>opengl</build_depend>
+  <exec_depend>rclpy</exec_depend><exec_depend>launch_ros</exec_depend>
+  <exec_depend>sorting_interfaces</exec_depend>
+  <exec_depend>tf2_ros_py</exec_depend><exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend><exec_depend>ament_index_python</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

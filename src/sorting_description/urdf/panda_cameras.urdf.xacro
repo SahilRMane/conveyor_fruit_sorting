@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot name="panda" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="$(find sorting_description)/urdf/panda_mujoco.urdf.xacro"/>
+  <xacro:arg name="camera_config" default="cameras.yaml"/>
+  <xacro:property name="calibration" value="${xacro.load_yaml('$(find sorting_perception)/config/$(arg camera_config)')}"/>
+  <xacro:macro name="camera_frame" params="view">
+    <xacro:property name="camera" value="${calibration['cameras'][view]}"/>
+    <link name="${camera['frame']}"/>
+    <joint name="${view}_camera_mount" type="fixed">
+      <parent link="${camera['parent']}"/><child link="${camera['frame']}"/>
+      <origin xyz="${' '.join(str(v) for v in camera['xyz'])}"
+              rpy="${' '.join(str(v) for v in camera['optical_rpy'])}"/>
+    </joint>
+  </xacro:macro>
+  <xacro:camera_frame view="overhead"/><xacro:camera_frame view="wrist"/>
+</robot>

@@ -1,0 +1,68 @@
+{
+  "class_ids": [
+    "red_fruit",
+    "green_fruit"
+  ],
+  "temperature": 0.6729867057766893,
+  "config_sha256": "6efc419c36e3469a770df6d17953f8de712be463a002aa4600da3302414abd16",
+  "weights_sha256": "bc5dc060ef8cf27a8998b62faf4a9788a01f901c7552c21aa85b45946bcab1c9",
+  "dataset_manifest_sha256": "7063480a20dcd031ce2b7fe50b84278f3287378b7ba38a548c6f3fa2a056981b",
+  "features_sha256": "72890d511bfff0de7eadf93c3e43de21d4c50f75eb4d377283a95b697a24982c",
+  "split_audit": {
+    "group_counts": {
+      "train": 144,
+      "validation": 32,
+      "calibration": 32,
+      "test": 32
+    },
+    "groups_disjoint": true,
+    "appearance_instances_disjoint": true,
+    "paired_classes_per_group": true
+  },
+  "selection": {
+    "selected_epoch": 156,
+    "selected_validation_nll": 0.462350869542209,
+    "history": [
+      {
+        "epoch": 0,
+        "validation_nll": 0.49462145789775924
+      },
+      {
+        "epoch": 20,
+        "validation_nll": 0.4694542282823175
+      },
+      {
+        "epoch": 40,
+        "validation_nll": 0.4657003404588263
+      },
+      {
+        "epoch": 60,
+        "validation_nll": 0.4669778845810815
+      },
+      {
+        "epoch": 80,
+        "validation_nll": 0.4892616556108844
+      },
+      {
+        "epoch": 100,
+        "validation_nll": 0.4681955379955311
+      },
+      {
+        "epoch": 120,
+        "validation_nll": 0.47594736096058404
+      },
+      {
+        "epoch": 140,
+        "validation_nll": 0.4672840854076979
+      }
+    ],
+    "selection_partition": "validation",
+    "test_used_for_selection": false
+  },
+  "calibration_nll_before": 0.46234863811912574,
+  "calibration_nll_after": 0.4621566200318969,
+  "test_used_for_training": false,
+  "test_used_for_calibration": false,
+  "network": "768 RGB inputs, 24 ReLU units, 2 logits; NumPy Adam",
+  "scope": "Synthetic fruit skin classification"
+}

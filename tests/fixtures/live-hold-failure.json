@@ -1,0 +1,410 @@
+{
+  "original_status": "FAIL",
+  "original_error": "Physical tray slip exceeds 3 mm",
+  "grasp_state": {
+    "sim_time": 30.272,
+    "left_force_N": 5.05493837902,
+    "right_force_N": 4.9061405723,
+    "support_force_N": 7.23528699604,
+    "gripper_force_limit_N": 20,
+    "friction_cone": 1,
+    "friction_impedance_ratio": 100,
+    "tray_mass_kg": 0.52,
+    "forbidden_contacts": 0,
+    "tray_xyz": [
+      0.645910059825,
+      -3.46373362582e-06,
+      0.305945541102
+    ],
+    "tray_quat_wxyz": [
+      0.99999999923,
+      7.26830974309e-06,
+      -3.84650346425e-05,
+      -2.68754824676e-06
+    ],
+    "hand_xyz": [
+      0.645912990406,
+      -5.60672707502e-06,
+      0.525672396204
+    ],
+    "hand_quat_wxyz": [
+      -5.88052960161e-05,
+      0.707111176503,
+      0.707102380498,
+      -6.40363896124e-05
+    ],
+    "finger_positions_m": [
+      0.00996714135865,
+      0.00996689747924
+    ],
+    "contact_schema_version": 2,
+    "bins_present": [
+      1,
+      1
+    ],
+    "bin_names": [
+      "bin_a",
+      "bin_b"
+    ],
+    "bin_floor_force_N": [
+      0,
+      0
+    ],
+    "bin_wall_force_N": [
+      0,
+      0
+    ],
+    "bin_floor_top_z": [
+      0.3,
+      0.3
+    ],
+    "bin_floor_xyz": [
+      [
+        0.45,
+        0.42,
+        0.285
+      ],
+      [
+        0.45,
+        -0.42,
+        0.285
+      ]
+    ],
+    "bin_floor_half_size": [
+      [
+        0.16,
+        0.13,
+        0.015
+      ],
+      [
+        0.16,
+        0.13,
+        0.015
+      ]
+    ],
+    "tray_linear_velocity_m_s": [
+      0.0295466888962,
+      -4.7531953565e-05,
+      -0.000165626822702
+    ],
+    "hand_linear_velocity_m_s": [
+      0.029444492372,
+      -4.24318064296e-05,
+      0.000123776485475
+    ],
+    "tray_angular_velocity_rad_s": [
+      2.2927040497e-05,
+      -0.000363290622801,
+      -0.000171923118245
+    ],
+    "tray_floor_force_N": 0,
+    "external_force_x_N": 0.320053225759,
+    "external_torque_y_Nm": -0.009375007452,
+    "reset_seq": 0
+  },
+  "samples": {
+    "held": {
+      "sim_time": 33.868,
+      "left_force_N": 4.96924196359,
+      "right_force_N": 4.98409404732,
+      "support_force_N": 0,
+      "gripper_force_limit_N": 20,
+      "friction_cone": 1,
+      "friction_impedance_ratio": 100,
+      "tray_mass_kg": 0.52,
+      "forbidden_contacts": 0,
+      "tray_xyz": [
+        0.672006886338,
+        2.22659859556e-05,
+        0.355739817973
+      ],
+      "tray_quat_wxyz": [
+        0.999998921111,
+        0.00020603198232,
+        -0.00145374282759,
+        -4.42667817283e-05
+      ],
+      "hand_xyz": [
+        0.671670795229,
+        -5.51423526856e-06,
+        0.575794253813
+      ],
+      "hand_quat_wxyz": [
+        -1.07831714722e-05,
+        0.707107489562,
+        0.707106072636,
+        -1.14463938894e-05
+      ],
+      "finger_positions_m": [
+        0.00996158010716,
+        0.00996157959288
+      ],
+      "contact_schema_version": 2,
+      "bins_present": [
+        1,
+        1
+      ],
+      "bin_names": [
+        "bin_a",
+        "bin_b"
+      ],
+      "bin_floor_force_N": [
+        0,
+        0
+      ],
+      "bin_wall_force_N": [
+        0,
+        0
+      ],
+      "bin_floor_top_z": [
+        0.3,
+        0.3
+      ],
+      "bin_floor_xyz": [
+        [
+          0.45,
+          0.42,
+          0.285
+        ],
+        [
+          0.45,
+          -0.42,
+          0.285
+        ]
+      ],
+      "bin_floor_half_size": [
+        [
+          0.16,
+          0.13,
+          0.015
+        ],
+        [
+          0.16,
+          0.13,
+          0.015
+        ]
+      ],
+      "tray_linear_velocity_m_s": [
+        -5.37371856696e-05,
+        3.039742061e-06,
+        -0.000121371598635
+      ],
+      "hand_linear_velocity_m_s": [
+        -1.11146850823e-05,
+        4.00950188176e-07,
+        -0.00012758184834
+      ],
+      "tray_angular_velocity_rad_s": [
+        -7.1296546975e-05,
+        0.000503414517409,
+        2.23997551058e-05
+      ],
+      "tray_floor_force_N": 0,
+      "external_force_x_N": 0,
+      "external_torque_y_Nm": 0,
+      "reset_seq": 0
+    },
+    "failure": {
+      "sim_time": 34.34,
+      "left_force_N": 5.00196049232,
+      "right_force_N": 4.95361865085,
+      "support_force_N": 0,
+      "gripper_force_limit_N": 20,
+      "friction_cone": 1,
+      "friction_impedance_ratio": 100,
+      "tray_mass_kg": 0.52,
+      "forbidden_contacts": 0,
+      "tray_xyz": [
+        0.670401636491,
+        -0.000123560021311,
+        0.347302956624
+      ],
+      "tray_quat_wxyz": [
+        0.999980302772,
+        3.70756958229e-05,
+        0.00627573809399,
+        -8.83500387172e-05
+      ],
+      "hand_xyz": [
+        0.67344014637,
+        -8.14854584377e-05,
+        0.56738164446
+      ],
+      "hand_quat_wxyz": [
+        -0.0052743057213,
+        0.707119156143,
+        0.707053347091,
+        -0.00549955291536
+      ],
+      "finger_positions_m": [
+        0.00996195556129,
+        0.00996121462739
+      ],
+      "contact_schema_version": 2,
+      "bins_present": [
+        1,
+        1
+      ],
+      "bin_names": [
+        "bin_a",
+        "bin_b"
+      ],
+      "bin_floor_force_N": [
+        0,
+        0
+      ],
+      "bin_wall_force_N": [
+        0,
+        0
+      ],
+      "bin_floor_top_z": [
+        0.3,
+        0.3
+      ],
+      "bin_floor_xyz": [
+        [
+          0.45,
+          0.42,
+          0.285
+        ],
+        [
+          0.45,
+          -0.42,
+          0.285
+        ]
+      ],
+      "bin_floor_half_size": [
+        [
+          0.16,
+          0.13,
+          0.015
+        ],
+        [
+          0.16,
+          0.13,
+          0.015
+        ]
+      ],
+      "tray_linear_velocity_m_s": [
+        -0.0030462240948,
+        -0.000358759107463,
+        -0.0200341411851
+      ],
+      "hand_linear_velocity_m_s": [
+        0.0030802093127,
+        -0.000228983582901,
+        -0.0204533384873
+      ],
+      "tray_angular_velocity_rad_s": [
+        -0.000565930233027,
+        0.0366202748066,
+        -0.000267539834327
+      ],
+      "tray_floor_force_N": 0,
+      "external_force_x_N": 0,
+      "external_torque_y_Nm": 0,
+      "reset_seq": 0
+    },
+    "paused": {
+      "sim_time": 34.64,
+      "left_force_N": 5.01829934237,
+      "right_force_N": 4.93891971046,
+      "support_force_N": 0,
+      "gripper_force_limit_N": 20,
+      "friction_cone": 1,
+      "friction_impedance_ratio": 100,
+      "tray_mass_kg": 0.52,
+      "forbidden_contacts": 0,
+      "tray_xyz": [
+        0.670068988374,
+        -0.000152365213583,
+        0.34562404404
+      ],
+      "tray_quat_wxyz": [
+        0.999969304348,
+        1.61208300981e-05,
+        0.00783459040484,
+        -9.64085590265e-05
+      ],
+      "hand_xyz": [
+        0.673791258468,
+        -9.60694783165e-05,
+        0.565663335188
+      ],
+      "hand_quat_wxyz": [
+        -0.00634597917782,
+        0.707115854916,
+        0.707038266903,
+        -0.00661705442253
+      ],
+      "finger_positions_m": [
+        0.00996215949225,
+        0.0099609998948
+      ],
+      "contact_schema_version": 2,
+      "bins_present": [
+        1,
+        1
+      ],
+      "bin_names": [
+        "bin_a",
+        "bin_b"
+      ],
+      "bin_floor_force_N": [
+        0,
+        0
+      ],
+      "bin_wall_force_N": [
+        0,
+        0
+      ],
+      "bin_floor_top_z": [
+        0.3,
+        0.3
+      ],
+      "bin_floor_xyz": [
+        [
+          0.45,
+          0.42,
+          0.285
+        ],
+        [
+          0.45,
+          -0.42,
+          0.285
+        ]
+      ],
+      "bin_floor_half_size": [
+        [
+          0.16,
+          0.13,
+          0.015
+        ],
+        [
+          0.16,
+          0.13,
+          0.015
+        ]
+      ],
+      "tray_linear_velocity_m_s": [
+        -0.00011838061115,
+        1.14487339106e-06,
+        -0.000658749520672
+      ],
+      "hand_linear_velocity_m_s": [
+        0.000102087789797,
+        -3.33097227056e-06,
+        -0.000668018161965
+      ],
+      "tray_angular_velocity_rad_s": [
+        -0.000113739523821,
+        0.00141795704391,
+        1.44054061125e-05
+      ],
+      "tray_floor_force_N": 0,
+      "external_force_x_N": 0,
+      "external_torque_y_Nm": 0,
+      "reset_seq": 0
+    }
+  }
+}

@@ -1,0 +1,9 @@
+uint64 epoch
+trajectory_msgs/JointTrajectory trajectory
+builtin_interfaces/Time deadline
+---
+bool success
+string reason
+int32 controller_error_code
+---
+string phase

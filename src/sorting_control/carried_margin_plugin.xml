@@ -1,0 +1,5 @@
+<library path="sorting_carried_margin_planner">
+  <class name="sorting_control/CarriedMarginPlanner" type="sorting_control::CarriedMarginPlanner" base_class_type="planning_interface::PlannerManager">
+    <description>Delegate carried planning to OMPL inside the original validation envelope.</description>
+  </class>
+</library>

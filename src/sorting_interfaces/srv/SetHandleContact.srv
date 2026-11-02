@@ -1,0 +1,7 @@
+# Debug collision-model allowance; changes no physics contact or body pose.
+uint64 episode_id
+uint64 owner_epoch
+bool allow_handle_contact
+---
+bool success
+string reason

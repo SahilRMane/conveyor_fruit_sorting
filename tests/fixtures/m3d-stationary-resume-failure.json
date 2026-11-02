@@ -1,0 +1,80 @@
+{
+  "error": "Stationary camera wait exceeded its bound",
+  "failure_diagnostic": {
+    "phase": "pregrasp_refinement",
+    "time_ns": 26049999999,
+    "scene": {
+      "valid": true,
+      "reason": "camera_geometry",
+      "time_ns": 26045999999,
+      "episode_id": 0,
+      "track_id": 1,
+      "camera_only": true,
+      "estimated_attachment": false,
+      "physics_attachment": false,
+      "allow_handle_contact": false,
+      "allow_tray_support_contact": false,
+      "support_cleared": false,
+      "estimated_support_gap_m": null,
+      "model_capture_ns": 25933999999,
+      "model_time_ns": 26015999999,
+      "destination_floor": "",
+      "estimated_body_matrix": null,
+      "estimated_placed": false
+    },
+    "belief_capture_ns": 25933999999,
+    "belief_capture_age_s": 0.116,
+    "belief_track_id": 1,
+    "bound_track_id": null
+  },
+  "camera_wait_trace": [
+    {
+      "time_ns": 25947999999,
+      "capture_ns": 25791999999,
+      "elapsed_wall_s": 0.0,
+      "elapsed_sim_s": 0.0,
+      "reason": "Camera capture age 0.156 s exceeds 0.150 s",
+      "zero_twist": true,
+      "phase": "pregrasp_refinement"
+    },
+    {
+      "time_ns": 25969999999,
+      "capture_ns": 25863999999,
+      "elapsed_wall_s": 0.020146102004218847,
+      "elapsed_sim_s": 0.022,
+      "reason": "Waiting for a fresh capture and matching camera scene",
+      "zero_twist": true,
+      "phase": "pregrasp_refinement"
+    },
+    {
+      "time_ns": 25989999999,
+      "capture_ns": 25863999999,
+      "elapsed_wall_s": 0.040109359004418366,
+      "elapsed_sim_s": 0.042,
+      "reason": "Waiting for a fresh capture and matching camera scene",
+      "zero_twist": true,
+      "phase": "pregrasp_refinement"
+    },
+    {
+      "time_ns": 26009999999,
+      "capture_ns": 25863999999,
+      "elapsed_wall_s": 0.06010467300075106,
+      "elapsed_sim_s": 0.062,
+      "reason": "Waiting for a fresh capture and matching camera scene",
+      "zero_twist": true,
+      "phase": "pregrasp_refinement"
+    },
+    {
+      "time_ns": 26029999999,
+      "capture_ns": 25933999999,
+      "elapsed_wall_s": 0.07999313000618713,
+      "elapsed_sim_s": 0.082,
+      "reason": "Waiting for a fresh capture and matching camera scene",
+      "zero_twist": true,
+      "phase": "pregrasp_refinement"
+    }
+  ],
+  "old_start_max_capture_age_s": 0.09,
+  "old_wait_sim_s": 0.1,
+  "old_wait_wall_s": 0.12
+}

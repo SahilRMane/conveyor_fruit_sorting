@@ -1,0 +1,13 @@
+# Use these overrides only for the M2 command-ownership launch.
+panda_arm_controller:
+  ros__parameters:
+    interpolate_from_desired_state: true
+    # Servo sends consecutive short trajectories with non-zero end velocity.
+    allow_nonzero_velocity_at_trajectory_end: true
+
+panda_hand_controller:
+  ros__parameters:
+    allow_stalling: true
+    goal_tolerance: 0.0005
+    stall_velocity_threshold: 0.001
+    stall_timeout: 1.0

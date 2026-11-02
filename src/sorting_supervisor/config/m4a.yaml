@@ -1,0 +1,49 @@
+checkpoint: M4A
+scope: stationary inspection development fixture
+hand_quaternion_xyzw: [0.7071067811865476, 0.7071067811865476, 0.0, 0.0]
+poses:
+  assess: [0.55, 0.0, 0.62]
+  inspect_left: [0.46, 0.0, 0.62]
+  inspect_right: [0.58, 0.0, 0.62]
+native_motion_duration_s: 6.0
+native_settle_s: 0.5
+maximum_capture_age_s: 0.15
+maximum_metadata_wait_wall_s: 0.5
+settle_sim_s: 0.5
+samples_per_pose: 5
+maximum_pose_wait_wall_s: 8.0
+maximum_motion_wall_s: 45.0
+maximum_motion_sim_s: 30.0
+maximum_joint_speed_rad_s: 0.25
+maximum_position_error_m: 0.006
+maximum_orientation_error_rad: 0.04
+maximum_localization_error_m: 0.002
+maximum_render_p95_wall_s: 0.035
+minimum_revealed_pixels: 20
+maximum_hidden_pixels: 3
+refinement:
+  maximum_entry_position_error_m: 0.015
+  maximum_entry_orientation_error_rad: 0.05
+  position_tolerance_m: 0.002
+  orientation_tolerance_rad: 0.01
+  maximum_linear_speed_m_s: 0.004
+  maximum_angular_speed_rad_s: 0.02
+  position_gain_per_s: 4.0
+  orientation_gain_per_s: 3.0
+  stable_sim_s: 0.25
+  maximum_sim_s: 8.0
+  maximum_wall_s: 15.0
+deadline:
+  exit_x_m: 0.75
+  maximum_horizon_s: 25.0
+  near_zero_speed_m_s: 0.001
+  uncertainty_sigma: 3.0
+  margin_s: 0.8
+  close_s: 0.8
+  approach_s: 3.0
+  inspect_travel_s: 6.0
+  inspect_settle_s: 0.5
+  capture_delivery_s: 0.15
+  processing_s: 0.02
+  return_to_grasp_s: 6.0
+  acceptance_confidence: 0.8

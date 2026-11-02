@@ -1,0 +1,48 @@
+marker_plane_z_m: 0.4309
+handle_plane_z_m: 0.4229
+workspace_x_m:
+- 0.45
+- 0.78
+workspace_y_m:
+- -0.15
+- 0.15
+hsv_lower:
+- 135
+- 80
+- 70
+hsv_upper:
+- 175
+- 255
+- 255
+minimum_marker_area_px: 12.0
+maximum_marker_area_fraction: 0.04
+minimum_rectangularity: 0.65
+border_margin_px: 3
+pixel_center_offset: 0.5
+pixel_sigma_px: 0.5
+maximum_image_age_s: 0.15
+maximum_future_stamp_s: 0.02
+maximum_pending_wall_s: 0.5
+minimum_camera_depth_m: 0.03
+maximum_camera_depth_m: 2.0
+minimum_ray_plane_cosine: 0.15
+maximum_planar_error_m: 0.002
+minimum_camera_rate_hz: 7.0
+maximum_camera_position_error_m: 0.001
+maximum_camera_orientation_error_rad: 0.005
+minimum_stationary_samples: 20
+minimum_wrist_samples: 10
+minimum_moving_samples: 20
+belt_speed_m_s: 0.03
+belt_duration_s: 3.0
+inspection_hand_xyz_m:
+- 0.55
+- 0.0
+- 0.67
+inspection_motion_duration_s: 5.0
+full_marker_extent_x_m:
+- 0.0098
+- 0.0182
+full_marker_extent_y_m:
+- 0.032
+- 0.048

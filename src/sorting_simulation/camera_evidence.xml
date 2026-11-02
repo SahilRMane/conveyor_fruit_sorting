@@ -1,0 +1,6 @@
+<library path="sorting_camera_evidence">
+  <class name="sorting_simulation/CameraEvidence" type="sorting_simulation::CameraEvidence"
+         base_class_type="mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase">
+    <description>Reset-only epoch for sensors, and optional isolated camera evaluation truth.</description>
+  </class>
+</library>

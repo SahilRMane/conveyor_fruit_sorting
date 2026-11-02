@@ -1,0 +1,35 @@
+world_frame: world
+hand_link: panda_hand
+group_name: panda_arm
+handle_offset_m: [0.0, 0.0, 0.117]
+hand_above_handle_m: 0.1029
+pregrasp_clearance_m: 0.06
+grasp_quaternion_xyzw: [0.7071067811865476, 0.7071067811865476, 0.0, 0.0]
+safe_x_interval_m: [0.48, 0.75]
+safe_y_limit_m: 0.02
+maximum_observation_age_s: 0.15
+maximum_source_wall_age_s: 0.5
+prediction_lead_s: 0.4
+maximum_prediction_lead_s: 25.0
+gripper_closure_estimate_s: 0.8
+belt_speed_m_s: 0.03
+planning_time_s: 5.0
+planning_velocity_scale: 0.05
+planning_acceleration_scale: 0.05
+maximum_plan_duration_s: 20.0
+maximum_plan_seed_error_rad: 0.025
+pregrasp_position_tolerance_m: 0.006
+planned_position_tolerance_m: 0.015
+pregrasp_orientation_tolerance_rad: 0.04
+frame_position_tolerance_m: 0.001
+frame_orientation_tolerance_rad: 0.002
+servo_axis_speed_m_s: 0.008
+servo_axis_duration_s: 1.2
+servo_yaw_speed_rad_s: 0.01
+position_gain_per_s: 4.0
+orientation_gain_per_s: 3.0
+maximum_linear_speed_m_s: 0.04
+maximum_angular_speed_rad_s: 0.08
+prediction_error_tolerance_m: 0.003
+prediction_trials: 10
+prediction_trial_spacing_s: 0.06

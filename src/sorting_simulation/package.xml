@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>sorting_simulation</name>
+  <version>0.1.0</version>
+  <description>Physical Panda grasp, conveyor transport, bin placement and reset checks.</description>
+  <maintainer email="sahilrmane1@gmail.com">smane</maintainer>
+  <license>Apache-2.0</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <depend>yaml_cpp_vendor</depend>
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>pluginlib</depend>
+  <depend>mujoco_vendor</depend>
+  <depend>mujoco_ros2_control_plugins</depend>
+  <depend>sorting_interfaces</depend>
+  <depend>geometry_msgs</depend>
+  <build_depend>opengl</build_depend>
+  <build_depend>eigen</build_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>action_msgs</exec_depend>
+  <exec_depend>control_msgs</exec_depend>
+  <exec_depend>trajectory_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>controller_manager_msgs</exec_depend>
+  <exec_depend>rcl_interfaces</exec_depend>
+  <exec_depend>mujoco_ros2_control_msgs</exec_depend>
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>ament_index_python</exec_depend>
+  <exec_depend>xacro</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>mujoco_ros2_control</exec_depend>
+  <exec_depend>sorting_description</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

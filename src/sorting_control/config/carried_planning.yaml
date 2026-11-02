@@ -1,0 +1,16 @@
+# Joint-space selection applies to the M3D arm planning group.
+# MoveIt 2.12 converts typed group booleans to the required numeric text.
+group:
+  enforce_joint_model_state_space: true
+# Only carried requests select this planner profile.
+planner_id: CarriedRRTConnect
+profile:
+  type: geometric::RRTConnect
+  range: 0.02
+  longest_valid_segment_fraction: 0.0005
+# Keep time-parameterization blending small relative to the orientation bound.
+totg:
+  path_tolerance: 0.0001
+  resample_dt: 0.01
+  min_angle_change: 0.001
+maximum_attempts: 2

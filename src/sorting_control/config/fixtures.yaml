@@ -1,0 +1,218 @@
+frame: world
+boxes:
+- id: support_surface
+  dimensions:
+  - 0.7
+  - 0.5
+  - 0.06
+  position:
+  - 0.65
+  - 0.0
+  - 0.27
+- id: support_leg_1
+  dimensions:
+  - 0.05
+  - 0.05
+  - 0.24
+  position:
+  - 0.35
+  - -0.2
+  - 0.12
+- id: support_leg_2
+  dimensions:
+  - 0.05
+  - 0.05
+  - 0.24
+  position:
+  - 0.35
+  - 0.2
+  - 0.12
+- id: support_leg_3
+  dimensions:
+  - 0.05
+  - 0.05
+  - 0.24
+  position:
+  - 0.95
+  - -0.2
+  - 0.12
+- id: support_leg_4
+  dimensions:
+  - 0.05
+  - 0.05
+  - 0.24
+  position:
+  - 0.95
+  - 0.2
+  - 0.12
+- id: tray_base
+  dimensions:
+  - 0.24
+  - 0.18
+  - 0.012
+  position:
+  - 0.55
+  - 0.0
+  - 0.307
+- id: tray_wall_x_minus
+  dimensions:
+  - 0.008
+  - 0.18
+  - 0.035
+  position:
+  - 0.43400000000000005
+  - 0.0
+  - 0.3305
+- id: tray_wall_x_plus
+  dimensions:
+  - 0.008
+  - 0.18
+  - 0.035
+  position:
+  - 0.666
+  - 0.0
+  - 0.3305
+- id: tray_wall_y_minus
+  dimensions:
+  - 0.224
+  - 0.008
+  - 0.035
+  position:
+  - 0.55
+  - -0.086
+  - 0.3305
+- id: tray_wall_y_plus
+  dimensions:
+  - 0.224
+  - 0.008
+  - 0.035
+  position:
+  - 0.55
+  - 0.086
+  - 0.3305
+- id: handle_post_minus
+  dimensions:
+  - 0.02
+  - 0.01
+  - 0.103
+  position:
+  - 0.55
+  - -0.05
+  - 0.3645
+- id: handle_post_plus
+  dimensions:
+  - 0.02
+  - 0.01
+  - 0.103
+  position:
+  - 0.55
+  - 0.05
+  - 0.3645
+- id: handle_bar
+  dimensions:
+  - 0.02
+  - 0.11
+  - 0.016
+  position:
+  - 0.55
+  - 0.0
+  - 0.424
+- id: bin_a_floor
+  dimensions:
+  - 0.32
+  - 0.26
+  - 0.03
+  position:
+  - 0.45
+  - 0.42
+  - 0.285
+- id: bin_a_wall_x_minus
+  dimensions:
+  - 0.008
+  - 0.26
+  - 0.05
+  position:
+  - 0.29400000000000004
+  - 0.42
+  - 0.325
+- id: bin_a_wall_x_plus
+  dimensions:
+  - 0.008
+  - 0.26
+  - 0.05
+  position:
+  - 0.606
+  - 0.42
+  - 0.325
+- id: bin_a_wall_y_minus
+  dimensions:
+  - 0.304
+  - 0.008
+  - 0.05
+  position:
+  - 0.45
+  - 0.294
+  - 0.325
+- id: bin_a_wall_y_plus
+  dimensions:
+  - 0.304
+  - 0.008
+  - 0.05
+  position:
+  - 0.45
+  - 0.546
+  - 0.325
+- id: bin_b_floor
+  dimensions:
+  - 0.32
+  - 0.26
+  - 0.03
+  position:
+  - 0.45
+  - -0.42
+  - 0.285
+- id: bin_b_wall_x_minus
+  dimensions:
+  - 0.008
+  - 0.26
+  - 0.05
+  position:
+  - 0.29400000000000004
+  - -0.42
+  - 0.325
+- id: bin_b_wall_x_plus
+  dimensions:
+  - 0.008
+  - 0.26
+  - 0.05
+  position:
+  - 0.606
+  - -0.42
+  - 0.325
+- id: bin_b_wall_y_minus
+  dimensions:
+  - 0.304
+  - 0.008
+  - 0.05
+  position:
+  - 0.45
+  - -0.546
+  - 0.325
+- id: bin_b_wall_y_plus
+  dimensions:
+  - 0.304
+  - 0.008
+  - 0.05
+  position:
+  - 0.45
+  - -0.294
+  - 0.325
+- id: static_floor
+  dimensions:
+  - 4.0
+  - 4.0
+  - 0.02
+  position:
+  - 0.0
+  - 0.0
+  - -0.01

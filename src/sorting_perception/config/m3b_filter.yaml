@@ -1,0 +1,20 @@
+maximum_capture_age_s: 0.15
+maximum_source_wall_age_s: 0.5
+maximum_future_stamp_s: 0.02
+track_timeout_s: 0.3
+maximum_prediction_horizon_s: 0.4
+view_selection_wait_wall_s: 0.0
+minimum_initial_samples: 6
+minimum_initial_span_s: 0.4
+acceleration_sigma_m_s2: 0.04
+initial_velocity_sigma_m_s: 0.05
+velocity_sigma_floor_m_s: 0.004
+measurement_sigma_floor_m: 0.0004
+innovation_gate_chi2: 25.0
+maximum_target_speed_m_s: 0.1
+workspace_x_m: [0.45, 0.78]
+workspace_y_m: [-0.15, 0.15]
+fixed_handle_z_m: 0.4229
+fixed_orientation_xyzw: [0.0, 0.0, 0.0, 1.0]
+prediction_lead_s: 0.4
+tracking_view: wrist

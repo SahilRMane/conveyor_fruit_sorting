@@ -1,0 +1,7 @@
+<library path="sorting_precision_smoothing">
+  <class name="sorting_control/PrecisionAccelerationLimitedPlugin"
+         type="sorting_control::PrecisionAccelerationLimitedPlugin"
+         base_class_type="online_signal_smoothing::SmoothingBaseClass">
+    <description>Installed acceleration limiter with bounded small-step recovery.</description>
+  </class>
+</library>

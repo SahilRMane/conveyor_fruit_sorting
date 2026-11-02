@@ -1,0 +1,42 @@
+checkpoint: M3C
+class_ids:
+- red_fruit
+- green_fruit
+camera_config: cameras_m3c.yaml
+localization_config: m3b_localization.yaml
+fruit_offset_from_handle_m:
+- -0.04
+- 0.0
+- -0.072
+fruit_crop_half_extent_m:
+- 0.047
+- 0.047
+- 0.04
+input_size: 16
+hidden_units: 24
+acceptance_confidence: 0.8
+maximum_capture_age_s: 0.15
+maximum_pending_wall_s: 0.5
+maximum_inference_wall_s: 0.02
+dataset_groups: 240
+split_group_counts:
+  train: 144
+  validation: 32
+  calibration: 32
+  test: 32
+dataset_seed: 4301
+train_seed: 73
+epochs: 160
+batch_size: 64
+learning_rate: 0.002
+weight_decay: 0.0001
+temperature_bounds:
+- 0.25
+- 8.0
+ece_bins: 10
+minimum_clear_accuracy: 0.9
+minimum_clear_coverage: 0.85
+maximum_accepted_error: 0.05
+maximum_hidden_coverage: 0.25
+maximum_ece: 0.1
+minimum_view_confidence_gain: 0.2

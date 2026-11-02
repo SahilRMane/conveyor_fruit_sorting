@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mujoco model="Panda M3 camera calibration and image localization">
+  <include file="panda_camera_m3b.xml" />
+  <include file="props_camera_m3b.xml" />
+  <include file="bins.xml" />
+  <option timestep="0.002" integrator="implicitfast" gravity="0 0 -9.81" cone="elliptic" impratio="100" />
+  <statistic center="0.45 0 0.35" extent="1.4" />
+  <visual>
+    <headlight diffuse="0.6 0.6 0.6" ambient="0.3 0.3 0.3" specular="0 0 0" />
+    <rgba haze="0.15 0.25 0.35 1" />
+    <global azimuth="135" elevation="-25" offwidth="320" offheight="240" />
+    <quality offsamples="4" shadowsize="512" />
+  </visual>
+  <asset>
+    <texture name="static_floor_texture" type="2d" builtin="checker" rgb1="0.22 0.25 0.28" rgb2="0.16 0.18 0.20" width="256" height="256" />
+    <material name="static_floor_material" texture="static_floor_texture" texuniform="true" texrepeat="4 4" reflectance="0.1" />
+  </asset>
+  <worldbody>
+    <light pos="0.5 -0.5 1.8" dir="0 0 -1" directional="true" castshadow="false" />
+    <geom name="static_floor" type="plane" size="2 2 0.05" material="static_floor_material" friction="0.7 0.005 0.0001" />
+    <camera name="static_overview" pos="1.5 -1.4 1.2" xyaxes="0.8 0.6 0 -0.3 0.4 0.866" />
+    <camera name="overhead" mode="fixed" pos="0.65 -0.55 1.15" xyaxes="1 0 0 0 0.7943045302461329 0.6075198048051357" fovy="50.0" resolution="320 240" />
+  </worldbody>
+  <contact>
+    <pair name="belt_tray_contact" geom1="tray_base" geom2="support_surface" condim="4" friction="0.05 0.05 0.005 0.0001 0.0001" />
+  </contact>
+</mujoco>

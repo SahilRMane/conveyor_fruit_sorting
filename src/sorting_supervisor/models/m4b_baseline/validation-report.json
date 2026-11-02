@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "cases": {
+    "assess/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "assess/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "assess/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_left/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_left/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_left/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_right/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_right/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_right/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    }
+  },
+  "ece": 0.007037425264621971,
+  "batched_wall_s": 0.002606144997116644,
+  "inference_p95_wall_s": 2.1371997718233615e-05,
+  "samples": 288,
+  "confidence_threshold": 0.8
+}

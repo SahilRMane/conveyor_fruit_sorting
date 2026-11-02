@@ -1,0 +1,15 @@
+checkpoint: M4B
+scope: stationary one-extra-view class decision; no pickup command
+acceptance_confidence: 0.8
+maximum_capture_age_s: 0.15
+maximum_policy_sim_s: 60.0
+maximum_policy_wall_s: 90.0
+inspection_view: inspect_left
+class_ids: [red_fruit, green_fruit]
+bins: {red_fruit: bin_a, green_fruit: bin_b}
+minimum_visible_accuracy: 0.95
+minimum_visible_coverage: 0.85
+maximum_hidden_coverage: 0.05
+maximum_accepted_error: 0.05
+maximum_ece: 0.10
+maximum_inference_p95_wall_s: 0.02

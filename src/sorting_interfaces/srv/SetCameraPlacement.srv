@@ -1,0 +1,7 @@
+uint64 episode_id
+uint64 owner_epoch
+string bin_id
+string operation
+---
+bool success
+string reason

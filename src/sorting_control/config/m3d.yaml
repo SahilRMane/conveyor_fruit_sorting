@@ -1,0 +1,90 @@
+checkpoint: M3D
+# At 15 Hz, 0.20 s allows three frame periods for a coherent new capture.
+# This wait sends zero twist. It does not increase the 0.15 s tracking age.
+stationary_camera_recovery:
+  resume_max_capture_age_s: 0.15
+  maximum_wait_sim_s: 0.20
+  maximum_wait_wall_s: 0.24
+  maximum_total_wait_wall_s: 0.40
+class_ids:
+- red_fruit
+- green_fruit
+class_to_bin:
+  red_fruit: bin_a
+  green_fruit: bin_b
+minimum_confidence: 0.8
+minimum_class_captures: 3
+minimum_class_span_s: 0.12
+class_wait_wall_s: 3.0
+maximum_capture_age_s: 0.15
+transfer_root_z_m: 0.4259
+placement_root_z_m: 0.3059
+placement_position_tolerance_m: 0.0015
+placement_orientation_tolerance_rad: 0.015
+placement_contact_timeout_s: 60.0
+transfer_segment_m: 0.04
+cartesian_segment_s: 2.0
+placement_settle_s: 2.0
+maximum_transfer_rise_m: 0.15
+minimum_airborne_transfer_rise_m: 0.085
+bins:
+  bin_a:
+    index: 0
+    center:
+    - 0.45
+    - 0.42
+    - 0.3059
+    half_size:
+    - 0.16
+    - 0.13
+  bin_b:
+    index: 1
+    center:
+    - 0.45
+    - -0.42
+    - 0.3059
+    half_size:
+    - 0.16
+    - 0.13
+footprint_margin_m: 0.011
+maximum_slip_m: 0.003
+maximum_force_N: 15.0
+minimum_contact_N: 0.2
+maximum_tilt_rad: 0.05235987756
+maximum_placed_error_m: 0.003
+maximum_placed_linear_speed_m_s: 0.002
+maximum_placed_angular_speed_rad_s: 0.02
+estimated_full_service_s: 65.0
+maximum_exit_estimate_s: 25.0
+retract_root_x_m: 0.55
+release_root_z_m: 0.3105
+lower_duration_s: 8.0
+release_motion_lease_s: 60.0
+maximum_release_gap_m: 0.0065
+# These are actuator position commands, not measured finger gaps. While the
+# handle blocks the fingers, raising the command reduces closing pressure.
+release_unload_positions_m: [0.0045, 0.0048, 0.0049, 0.0052, 0.006, 0.008]
+release_unload_settle_s: 1.0
+release_finger_positions_m: [0.01025, 0.0105, 0.01075, 0.011, 0.0115, 0.012, 0.014, 0.018, 0.026, 0.034, 0.04]
+pass_transport_s: 2.0
+transfer_start_orientation_tolerance_rad: 0.005
+transfer_path_orientation_tolerance_rad: 0.01
+
+supported_release:
+  approach_speed_m_s: 0.0003
+  maximum_approach_distance_m: 0.009
+  maximum_approach_sim_s: 35.0
+  maximum_approach_wall_s: 50.0
+  support_fraction: 0.25
+  stable_span_s: 0.02
+  minimum_samples: 3
+  payload_weight_N: 5.1012
+  maximum_wrench_age_s: 0.05
+  maximum_wrench_wall_age_s: 0.20
+  tare_span_s: 0.20
+  tare_maximum_spread_N: 0.10
+  maximum_model_height_correction_m: 0.0065
+  force_velocity_gain_m_per_N_s: 0.00005
+  approach_start_root_z_m: 0.3115
+  supported_unload_positions_m: [0.0045, 0.0080, 0.0088, 0.0094]
+  maximum_open_payload_fraction: 0.15

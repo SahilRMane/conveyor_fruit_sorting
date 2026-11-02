@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    mujoco_plugins:
+      contact_monitor:
+        type: sorting_simulation/ContactMonitor
+      conveyor_transport:
+        type: sorting_simulation/ConveyorPlugin

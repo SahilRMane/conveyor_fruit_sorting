@@ -1,0 +1,9 @@
+controller_manager:
+  ros__parameters:
+    panda_hand_wrench_broadcaster:
+      type: force_torque_sensor_broadcaster/ForceTorqueSensorBroadcaster
+panda_hand_wrench_broadcaster:
+  ros__parameters:
+    use_sim_time: true
+    sensor_name: panda_hand_wrench_fts
+    frame_id: panda_hand

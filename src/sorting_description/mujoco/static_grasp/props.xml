@@ -1,0 +1,109 @@
+<mujoco>
+  <default>
+    <default class="sorting_support">
+      <geom type="box"
+            condim="4"
+            friction="0.7 0.005 0.0001"
+            solref="0.01 1"
+            solimp="0.9 0.95 0.001"
+            rgba="0.18 0.22 0.26 1"/>
+    </default>
+
+    <default class="sorting_tray">
+      <geom type="box"
+            condim="4"
+            friction="0.8 0.005 0.0001"
+            solref="0.01 1"
+            solimp="0.9 0.95 0.001"
+            rgba="0.20 0.55 0.80 1"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <!-- No joint: the support is fixed to the world.
+         The top surface is at z = 0.30 m. -->
+    <body name="stationary_support" childclass="sorting_support">
+      <geom name="support_surface"
+            pos="0.65 0 0.27"
+            size="0.35 0.25 0.03"/>
+
+      <geom name="support_leg_1"
+            pos="0.35 -0.20 0.12"
+            size="0.025 0.025 0.12"/>
+
+      <geom name="support_leg_2"
+            pos="0.35 0.20 0.12"
+            size="0.025 0.025 0.12"/>
+
+      <geom name="support_leg_3"
+            pos="0.95 -0.20 0.12"
+            size="0.025 0.025 0.12"/>
+
+      <geom name="support_leg_4"
+            pos="0.95 0.20 0.12"
+            size="0.025 0.025 0.12"/>
+    </body>
+
+    <!-- The tray bottom starts 1 mm above the support.
+         Gravity closes this gap. -->
+    <body name="tray"
+          pos="0.55 0 0.307"
+          quat="1 0 0 0"
+          childclass="sorting_tray">
+
+      <freejoint name="tray_free_joint"/>
+
+      <!-- Open tray: external dimensions 0.24 x 0.18 m. -->
+      <geom name="tray_base"
+            size="0.12 0.09 0.006"
+            mass="0.30"/>
+
+      <geom name="tray_wall_x_minus"
+            pos="-0.116 0 0.0235"
+            size="0.004 0.09 0.0175"
+            mass="0.03"/>
+
+      <geom name="tray_wall_x_plus"
+            pos="0.116 0 0.0235"
+            size="0.004 0.09 0.0175"
+            mass="0.03"/>
+
+      <geom name="tray_wall_y_minus"
+            pos="0 -0.086 0.0235"
+            size="0.112 0.004 0.0175"
+            mass="0.03"/>
+
+      <geom name="tray_wall_y_plus"
+            pos="0 0.086 0.0235"
+            size="0.112 0.004 0.0175"
+            mass="0.03"/>
+
+      <!-- Posts connect the handle to the tray base. -->
+      <geom name="handle_post_minus"
+            pos="0 -0.05 0.0575"
+            size="0.01 0.005 0.0515"
+            mass="0.02"
+            rgba="0.95 0.65 0.15 1"/>
+
+      <geom name="handle_post_plus"
+            pos="0 0.05 0.0575"
+            size="0.01 0.005 0.0515"
+            mass="0.02"
+            rgba="0.95 0.65 0.15 1"/>
+
+      <geom name="handle_bar"
+            pos="0 0 0.117"
+            size="0.01 0.055 0.008"
+            mass="0.06"
+            rgba="0.95 0.65 0.15 1"/>
+
+      <!-- Position marker only. This site applies no force. -->
+      <site name="handle_grasp_site"
+            pos="0 0 0.117"
+            type="sphere"
+            size="0.003"
+            rgba="1 0.15 0.15 1"
+            group="4"/>
+    </body>
+  </worldbody>
+</mujoco>

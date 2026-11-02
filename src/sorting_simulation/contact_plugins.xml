@@ -1,0 +1,12 @@
+<library path="sorting_contact_monitor">
+  <class name="sorting_simulation/ContactMonitor"
+         type="sorting_simulation::ContactMonitor"
+         base_class_type="mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase">
+    <description>Read finger-to-handle contact forces and scene state.</description>
+  </class>
+  <class name="sorting_simulation/ConveyorPlugin"
+         type="sorting_simulation::ConveyorPlugin"
+         base_class_type="mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase">
+    <description>Bounded traction for free trays supported in the belt region.</description>
+  </class>
+</library>

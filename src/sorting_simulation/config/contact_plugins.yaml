@@ -1,0 +1,5 @@
+/**:
+  ros__parameters:
+    mujoco_plugins:
+      contact_monitor:
+        type: sorting_simulation/ContactMonitor

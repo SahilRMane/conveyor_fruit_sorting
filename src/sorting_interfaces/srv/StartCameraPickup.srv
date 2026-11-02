@@ -1,0 +1,6 @@
+uint64 episode_id
+uint64 track_id
+uint64 trial_id
+---
+bool accepted
+string reason

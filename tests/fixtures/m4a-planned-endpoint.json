@@ -1,0 +1,9 @@
+{
+  "phase": "MOVE",
+  "pose": "assess",
+  "position_error_m": 0.006768,
+  "orientation_error_rad": 0.013613,
+  "planned_duration_s": 1.146924071,
+  "final_hold_status": "PASS",
+  "note": "Rounded values from the retained live failure. The subsequent retry was blocked by the fresh-launch guard."
+}

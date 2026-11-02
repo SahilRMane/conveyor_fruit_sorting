@@ -1,0 +1,34 @@
+# Generated workspace files.
+build/
+install/
+log/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+/.vscode/
+
+# Local credentials.
+.env
+.env.*
+!.env.example
+
+# Runtime data and local archives.
+/results/
+/backups/
+/evidence/
+/experiments/
+/docs/history/
+/*.zip
+/*.tar.gz
+/M[1-9]*/
+/M[1-9]*.md
+/M[1-9]*.py
+/conveyor_sorting_*_plan.md
+/environment.md
+/environment_audit.txt
+/docs/RESTORE.md
+/scripts/copy_backup_evidence.py
+
+# Upstream clone; the revision is in dependencies.repos.
+/third_party/mujoco_menagerie/

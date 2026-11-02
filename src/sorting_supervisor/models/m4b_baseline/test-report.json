@@ -1,0 +1,136 @@
+{
+  "status": "PASS",
+  "cases": {
+    "assess/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "assess/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "assess/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_left/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_left/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_left/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_right/clear": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 1.0,
+      "accuracy": 1.0,
+      "accepted_error": 0.0,
+      "observable": true
+    },
+    "inspect_right/partial": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    },
+    "inspect_right/covered": {
+      "status": "PASS",
+      "samples": 32,
+      "coverage": 0.0,
+      "accuracy": null,
+      "accepted_error": null,
+      "observable": false
+    }
+  },
+  "ece": 0.006952336783027326,
+  "batched_wall_s": 0.002029112998570781,
+  "inference_p95_wall_s": 1.8997001461684704e-05,
+  "samples": 288,
+  "confidence_threshold": 0.8,
+  "split_audit": {
+    "groups": 120,
+    "group_counts": {
+      "train": 72,
+      "test": 16,
+      "calibration": 16,
+      "validation": 16
+    },
+    "groups_disjoint": true,
+    "procedural_seeds_disjoint": true,
+    "matched_class_view_groups": true,
+    "assets": "Same synthetic asset; held-out nuisance seeds"
+  },
+  "paired_view_audit": {
+    "assess/clear": {
+      "mean_rgb_difference": 0.055664291195753404,
+      "maximum_rgb_difference": 0.05956022475136996
+    },
+    "assess/partial": {
+      "mean_rgb_difference": 0.0,
+      "maximum_rgb_difference": 0.0
+    },
+    "assess/covered": {
+      "mean_rgb_difference": 0.0,
+      "maximum_rgb_difference": 0.0
+    },
+    "inspect_left/clear": {
+      "mean_rgb_difference": 0.05498491794456051,
+      "maximum_rgb_difference": 0.05906682850400928
+    },
+    "inspect_left/partial": {
+      "mean_rgb_difference": 0.01028743407224123,
+      "maximum_rgb_difference": 0.011036343017411306
+    },
+    "inspect_left/covered": {
+      "mean_rgb_difference": 0.0,
+      "maximum_rgb_difference": 0.0
+    },
+    "inspect_right/clear": {
+      "mean_rgb_difference": 0.03932780327435859,
+      "maximum_rgb_difference": 0.04311614417620419
+    },
+    "inspect_right/partial": {
+      "mean_rgb_difference": 0.0,
+      "maximum_rgb_difference": 0.0
+    },
+    "inspect_right/covered": {
+      "mean_rgb_difference": 0.0,
+      "maximum_rgb_difference": 0.0
+    }
+  },
+  "model_sha256": "b554d2a27574126499f8fefdfcd99c535d1699fc99d65c4be4270a23803a56a1",
+  "test_used_for_selection": false,
+  "scope": "M4B synthetic class cues at three stationary wrist poses; same asset, grouped nuisance seeds"
+}

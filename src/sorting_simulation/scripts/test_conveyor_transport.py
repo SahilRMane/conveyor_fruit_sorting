@@ -1,0 +1,115 @@
+#!/usr/bin/env python3
+"""Check live bounded conveyor transport; this test does not grasp a moving tray."""
+import argparse
+import json
+import math
+from pathlib import Path
+import time
+
+import rclpy
+from rclpy.signals import SignalHandlerOptions
+from std_msgs.msg import Float64, String
+
+
+def require(condition,message):
+    if not condition:
+        raise RuntimeError(message)
+
+
+def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output",type=Path,default=Path("results/conveyor-ros-transport.json"))
+    args=parser.parse_args()
+    rclpy.init(signal_handler_options=SignalHandlerOptions.NO)
+    node=rclpy.create_node("conveyor_transport_test")
+    latest,history={},[]
+    received=None
+    command=0.0
+    heartbeat=True
+    guarded=True
+    report={"status":"FAIL","mode":"bounded_force_approximation","oracle_only":True,"checks":{}}
+    publisher=node.create_publisher(Float64,"/sorting/conveyor_command",1)
+
+    def send():
+        if heartbeat:
+            msg=Float64()
+            msg.data=float(command)
+            publisher.publish(msg)
+
+    def receive(message):
+        nonlocal received
+        value=json.loads(message.data)
+        if guarded:
+            require(value.get("mode")=="bounded_transport_force" and value.get("oracle_only") is True,
+                    "Use the conveyor spike launch and truth monitor")
+            require(all(math.isfinite(v) for v in value["tray_xyz"]+[value["tray_vx_m_s"],value["force_x_N"]]),
+                    "Non-finite conveyor state")
+            require(abs(value["force_x_N"])<=8.0001,"Conveyor force exceeded 8 N")
+            require(value["forbidden_contacts"]==0,"Unexpected robot contact")
+            require(0.42<=value["tray_xyz"][0]<=0.88 and abs(value["tray_xyz"][1])<0.01,
+                    "Tray left the validated transport region")
+        latest.clear();latest.update(value);history.append(value);received=time.monotonic()
+
+    node.create_subscription(String,"/sorting/ground_truth/conveyor_state",receive,10)
+    node.create_timer(0.1,send)
+
+    def until(predicate,timeout=20):
+        end=time.monotonic()+timeout
+        while time.monotonic()<end:
+            rclpy.spin_once(node,timeout_sec=0.02)
+            if guarded and received is not None:
+                require(time.monotonic()-received<1,"Conveyor telemetry stopped")
+            if predicate():return
+        raise TimeoutError("Conveyor wait timed out")
+
+    def wait_sim(seconds):
+        start=latest["sim_time"]
+        until(lambda:latest["sim_time"]>=start+seconds)
+
+    try:
+        until(lambda:bool(latest))
+        wait_sim(1)
+        require(abs(latest["tray_xyz"][0]-0.55)<0.005,"Restart the launch for a fresh tray at x=0.55 m")
+        require(latest["support_force_N"]>0.5,"Tray must start on the support")
+        initial=latest.copy();report["checks"]["initial_state"]=initial
+        command=0.03;send();wait_sim(2)
+        history.clear();wait_sim(2)
+        require(len(history)>=20,"Not enough steady-speed samples")
+        speeds=[s["tray_vx_m_s"] for s in history]
+        require(min(speeds)>0.028 and max(speeds)<0.032,"Speed tracking error exceeded 2 mm/s")
+        displacement=latest["tray_xyz"][0]-initial["tray_xyz"][0]
+        require(displacement>0.08,"Tray did not move at least 80 mm")
+        report["checks"]["transport"]={"minimum_vx_m_s":min(speeds),"maximum_vx_m_s":max(speeds),
+                                         "displacement_m":displacement,"peak_force_N":max(abs(s["force_x_N"]) for s in history)}
+        command=0.0;send();wait_sim(1)
+        require(abs(latest["tray_vx_m_s"])<0.002 and abs(latest["force_x_N"])<1e-6,"Stop check failed")
+        report["checks"]["stopped_state"]=latest.copy()
+        # Send a valid command briefly, then deliberately stop the heartbeat.
+        command=0.03;send();wait_sim(0.2);heartbeat=False
+        deadline=time.monotonic()+1.0
+        until(lambda:time.monotonic()>=deadline)
+        require(latest["command_fresh"] is False and abs(latest["force_x_N"])<1e-6,
+                "Expired command did not clear conveyor force")
+        report["checks"]["expired_state"]=latest.copy()
+        heartbeat=True;command=0.2;send();wait_sim(0.3)
+        require(latest["requested_speed_m_s"]==0 and abs(latest["force_x_N"])<1e-6,"Invalid speed was not rejected")
+        report["checks"]["invalid_command_rejected"]=True
+        command=0.0;send();wait_sim(1)
+        report["status"]="PASS"
+    except (Exception,KeyboardInterrupt) as error:
+        report["error"]=str(error) or "Interrupted by user"
+    finally:
+        guarded=False;heartbeat=True;command=0.0
+        try:
+            end=time.monotonic()+0.5
+            while time.monotonic()<end:
+                send();rclpy.spin_once(node,timeout_sec=0.02)
+        except Exception as error:report["stop_error"]=str(error)
+        node.destroy_node();rclpy.shutdown()
+    args.output.parent.mkdir(parents=True,exist_ok=True)
+    args.output.write_text(json.dumps(report,indent=2)+"\n")
+    print(json.dumps(report,indent=2))
+    return 0 if report["status"]=="PASS" else 1
+
+
+if __name__=="__main__":raise SystemExit(main())

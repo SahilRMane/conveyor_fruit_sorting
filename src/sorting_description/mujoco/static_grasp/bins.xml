@@ -1,0 +1,26 @@
+<mujoco>
+  <default>
+    <default class="sorting_bin">
+      <geom type="box" condim="4" friction="0.7 0.005 0.0001"
+            solref="0.01 1" solimp="0.9 0.95 0.001" rgba="0.35 0.65 0.40 1"/>
+    </default>
+  </default>
+  <worldbody>
+    <!-- Fixed bins. Floor top z=0.30 m; wall top z=0.35 m.
+         Interior size 0.304 x 0.244 m; tray size 0.24 x 0.18 m. -->
+    <body name="bin_a" pos="0.45 0.42 0" childclass="sorting_bin">
+      <geom name="bin_a_floor" pos="0 0 0.285" size="0.16 0.13 0.015"/>
+      <geom name="bin_a_wall_x_minus" pos="-0.156 0 0.325" size="0.004 0.13 0.025"/>
+      <geom name="bin_a_wall_x_plus" pos="0.156 0 0.325" size="0.004 0.13 0.025"/>
+      <geom name="bin_a_wall_y_minus" pos="0 -0.126 0.325" size="0.152 0.004 0.025"/>
+      <geom name="bin_a_wall_y_plus" pos="0 0.126 0.325" size="0.152 0.004 0.025"/>
+    </body>
+    <body name="bin_b" pos="0.45 -0.42 0" childclass="sorting_bin">
+      <geom name="bin_b_floor" pos="0 0 0.285" size="0.16 0.13 0.015" rgba="0.45 0.45 0.75 1"/>
+      <geom name="bin_b_wall_x_minus" pos="-0.156 0 0.325" size="0.004 0.13 0.025"/>
+      <geom name="bin_b_wall_x_plus" pos="0.156 0 0.325" size="0.004 0.13 0.025"/>
+      <geom name="bin_b_wall_y_minus" pos="0 -0.126 0.325" size="0.152 0.004 0.025"/>
+      <geom name="bin_b_wall_y_plus" pos="0 0.126 0.325" size="0.152 0.004 0.025"/>
+    </body>
+  </worldbody>
+</mujoco>

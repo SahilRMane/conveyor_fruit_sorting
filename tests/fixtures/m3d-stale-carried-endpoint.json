@@ -1,0 +1,237 @@
+{
+  "raised_state": {
+    "sim_time": 61.056,
+    "left_force_N": 4.96824204477,
+    "right_force_N": 4.98249710978,
+    "support_force_N": 0,
+    "gripper_force_limit_N": 20,
+    "friction_cone": 1,
+    "friction_impedance_ratio": 100,
+    "tray_mass_kg": 0.52,
+    "forbidden_contacts": 0,
+    "tray_xyz": [
+      0.552723337504,
+      0.00103263591244,
+      0.42497435288
+    ],
+    "tray_quat_wxyz": [
+      0.999998446756,
+      0.00080040420035,
+      -0.00157009045048,
+      -2.5594380157e-05
+    ],
+    "hand_xyz": [
+      0.552361382635,
+      0.00143190668027,
+      0.645479326444
+    ],
+    "hand_quat_wxyz": [
+      -1.86107717758e-05,
+      0.707106171897,
+      0.707107389959,
+      -1.96024199316e-05
+    ],
+    "finger_positions_m": [
+      0.00996183312881,
+      0.00996183927502
+    ],
+    "contact_schema_version": 2,
+    "bins_present": [
+      1,
+      1
+    ],
+    "bin_names": [
+      "bin_a",
+      "bin_b"
+    ],
+    "bin_floor_force_N": [
+      0,
+      0
+    ],
+    "bin_wall_force_N": [
+      0,
+      0
+    ],
+    "bin_floor_top_z": [
+      0.3,
+      0.3
+    ],
+    "bin_floor_xyz": [
+      [
+        0.45,
+        0.42,
+        0.285
+      ],
+      [
+        0.45,
+        -0.42,
+        0.285
+      ]
+    ],
+    "bin_floor_half_size": [
+      [
+        0.16,
+        0.13,
+        0.015
+      ],
+      [
+        0.16,
+        0.13,
+        0.015
+      ]
+    ],
+    "tray_linear_velocity_m_s": [
+      -4.4251780135e-05,
+      2.66672161058e-05,
+      -6.34157391969e-06
+    ],
+    "hand_linear_velocity_m_s": [
+      -2.60736213847e-07,
+      2.37871091932e-06,
+      8.23567172591e-06
+    ],
+    "tray_angular_velocity_rad_s": [
+      -0.000153698519027,
+      0.000468076061916,
+      2.82303531787e-05
+    ],
+    "tray_floor_force_N": 0,
+    "external_force_x_N": 0,
+    "external_torque_y_Nm": 0,
+    "reset_seq": 0
+  },
+  "clearance_failure_state": {
+    "sim_time": 62.67,
+    "left_force_N": 5.09553927255,
+    "right_force_N": 4.85835739736,
+    "support_force_N": 0,
+    "gripper_force_limit_N": 20,
+    "friction_cone": 1,
+    "friction_impedance_ratio": 100,
+    "tray_mass_kg": 0.52,
+    "forbidden_contacts": 0,
+    "tray_xyz": [
+      0.550474047661,
+      0.000560093428136,
+      0.390178080478
+    ],
+    "tray_quat_wxyz": [
+      0.999998843113,
+      0.000976306468777,
+      0.00116643793764,
+      -4.64286726725e-06
+    ],
+    "hand_xyz": [
+      0.550702362712,
+      0.000891857401314,
+      0.611196870126
+    ],
+    "hand_quat_wxyz": [
+      0.000150661838547,
+      0.707098956941,
+      0.707114570769,
+      0.000161864633261
+    ],
+    "finger_positions_m": [
+      0.0099706105752,
+      0.0099703450343
+    ],
+    "contact_schema_version": 2,
+    "bins_present": [
+      1,
+      1
+    ],
+    "bin_names": [
+      "bin_a",
+      "bin_b"
+    ],
+    "bin_floor_force_N": [
+      0,
+      0
+    ],
+    "bin_wall_force_N": [
+      0,
+      0
+    ],
+    "bin_floor_top_z": [
+      0.3,
+      0.3
+    ],
+    "bin_floor_xyz": [
+      [
+        0.45,
+        0.42,
+        0.285
+      ],
+      [
+        0.45,
+        -0.42,
+        0.285
+      ]
+    ],
+    "bin_floor_half_size": [
+      [
+        0.16,
+        0.13,
+        0.015
+      ],
+      [
+        0.16,
+        0.13,
+        0.015
+      ]
+    ],
+    "tray_linear_velocity_m_s": [
+      -0.00171989433971,
+      -0.000865463983979,
+      -0.0497283140858
+    ],
+    "hand_linear_velocity_m_s": [
+      -0.00210443790455,
+      -0.000768038724256,
+      -0.0497796111924
+    ],
+    "tray_angular_velocity_rad_s": [
+      -0.00047761428241,
+      -0.0053378365089,
+      1.14866963772e-05
+    ],
+    "tray_floor_force_N": 0,
+    "external_force_x_N": 0,
+    "external_torque_y_Nm": 0,
+    "reset_seq": 0
+  },
+  "last_servo_sample": {
+    "time_ns": 62664000000,
+    "tf_stamp_ns": 62630000000,
+    "tf_age_s": 0.034,
+    "hand_xyz": [
+      0.5506856546490096,
+      0.0008948982763987899,
+      0.6114398544789393
+    ],
+    "target_xyz": [
+      0.5506405226746311,
+      0.0007128275607047763,
+      0.6000655462125681
+    ],
+    "position_error_m": [
+      -4.513197437849836e-05,
+      -0.0001820707156940136,
+      -0.011374308266371203
+    ],
+    "orientation_error_rad": 0.0002608221605990848,
+    "hand_velocity_m_s": [
+      -0.0030018791782352146,
+      -0.0007901739879593796,
+      -0.04859109981313387
+    ],
+    "target_velocity_m_s": [
+      -0.002528692338178573,
+      -0.001056690075767658,
+      -0.0667343292776432
+    ],
+    "phase": "transfer"
+  },
+  "grasp_baseline_z_m": 0.305951441702
+}

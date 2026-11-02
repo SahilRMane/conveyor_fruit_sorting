@@ -1,0 +1,6 @@
+<library path="sorting_planning_only_controllers">
+  <class name="sorting_control/PlanningOnlyControllers" type="sorting_control::PlanningOnlyControllers"
+         base_class_type="moveit_controller_manager::MoveItControllerManager">
+    <description>Planning-only manager with no command handles. Execute through the arm gate.</description>
+  </class>
+</library>

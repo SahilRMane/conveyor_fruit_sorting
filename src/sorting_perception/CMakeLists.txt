@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.16)
+project(sorting_perception)
+find_package(ament_cmake REQUIRED)
+install(PROGRAMS scripts/handle_localizer.py scripts/test_m3a.py scripts/validate_m3a_files.py
+  scripts/motion_filter.py scripts/test_m3b.py scripts/validate_m3b_files.py
+  DESTINATION lib/${PROJECT_NAME})
+install(FILES scripts/camera_core.py scripts/m3a_probe.py scripts/camera_qos.py scripts/filter_core.py scripts/m3b_evaluator.py scripts/native_camera_pickup.py scripts/m3b_manifest.py scripts/lift_support_fixtures.py scripts/m3b_acceptance.py DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS scripts/build_m3c_dataset.py scripts/train_m3c.py scripts/validate_m3c_files.py scripts/fruit_classifier.py scripts/test_m3c.py DESTINATION lib/${PROJECT_NAME})
+install(FILES scripts/classifier_core.py scripts/m3c_data.py scripts/classifier_state.py DESTINATION lib/${PROJECT_NAME})
+install(PROGRAMS scripts/test_m3d.py scripts/validate_m3d_files.py scripts/summarize_m3d.py scripts/replay_m3d_reset.py scripts/probe_m3d_planning.py DESTINATION lib/${PROJECT_NAME})
+install(FILES scripts/m3d_evaluator.py scripts/native_sort.py scripts/m3d_manifest.py scripts/sort_fixtures.py scripts/m3d_acceptance.py scripts/hold_handoff_probe.py scripts/carried_endpoint_probe.py scripts/floor_release_probe.py DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY models DESTINATION share/${PROJECT_NAME})
+install(FILES scripts/carried_checks.py scripts/m3d_components.py DESTINATION lib/${PROJECT_NAME})
+install(DIRECTORY config launch DESTINATION share/${PROJECT_NAME})
+ament_package()
