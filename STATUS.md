@@ -10,7 +10,7 @@ The supervisor keeps arm command ownership exclusive.
 | M5 offline selector | 192 held-out cases per deadline window. In the widest window, the learned selector made 144 correct accepts and the fixed-left policy made 96. Both made zero wrong accepts. |
 | M5 live inspection | Left, right and late cases passed with the frozen selector |
 | M5 physical sorting | The left-view pilot sorted to bin A. The right-view pilot sorted to bin B. Both passed reset and ended in HOLD with zero command overlap. |
-| M5 seeded selector | 11-case runner available. Visible probes passed green partial sorting and red covered tray exit. |
+| M5 seeded selector | 11 of 11 seeded cases passed. Five trays reached the correct bins and six trays exited. Every reset passed with zero command overlaps. |
 
 These results use simulated trays with red and green cues.
 The current code includes a two-view selector, independent evaluation and NVIDIA camera rendering.

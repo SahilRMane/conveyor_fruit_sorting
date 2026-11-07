@@ -44,7 +44,7 @@ flowchart LR
 | Stationary active inspection | All six clear, partial and covered fixtures passed |
 | Moving inspection and timing | All seven engineering cases passed |
 | Integrated inspection and physical sorting | 10 / 10 seeded M4 cases |
-| Learned view selection and physical sorting | Two live pilots. Both bins, reset and final HOLD passed. |
+| Learned view selection and physical sorting | 11 / 11 seeded M5 cases. Five sorts and six tray exits. |
 
 These results apply to the documented synthetic scenes and speeds.
 The classifier reads red and green cues.
