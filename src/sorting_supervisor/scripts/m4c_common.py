@@ -1,6 +1,8 @@
 """Installed M4C configuration, source binding, scenes and measured M4B costs."""
 import json
+import os
 from pathlib import Path
+from ament_index_python.packages import get_package_prefix
 import xml.etree.ElementTree as ET
 import yaml
 from m4b_common import installed_manifest as base_manifest, scenes as baseline_scenes
@@ -14,10 +16,17 @@ def config():
 
 def manifest():
     result = base_manifest()
+    result['m4c/render_backend_request']=os.environ.get('SORTING_RENDER_BACKEND','auto')
+    result['m4c/software_rendering']=os.environ.get('LIBGL_ALWAYS_SOFTWARE','').lower() in ('1','true','yes')
     result['m4c/native_probe'] = digest(executable('sorting_supervisor', 'probe_m4c_scene'))
     result['m4c/motion_filter'] = digest(executable('sorting_perception', 'motion_filter.py'))
     result['m4c/localizer'] = digest(executable('sorting_perception', 'handle_localizer.py'))
     result['m4c/filter_core'] = digest(executable('sorting_perception', 'filter_core.py'))
+    simulation=Path(get_package_prefix('sorting_simulation'))
+    result['m4c/camera_side_library']=digest(simulation/'lib/libsorting_traced_camera.so')
+    result['m4c/camera_side_probe']=digest(executable('sorting_simulation','verify_camera_trace'))
+    for name in ('traced_camera_plugin.xml','camera_trace_provenance.json'):
+        result['m4c/'+name]=digest(share('sorting_simulation')/name)
     return result
 
 
@@ -91,6 +100,6 @@ def checked_preflight(folder):
     folder = Path(folder).expanduser().resolve()
     r = json.loads((folder/'preflight.json').read_text())
     require(r.get('checkpoint') == 'M4C' and r.get('status') == 'PASS', 'A passing M4C preflight is required')
-    require(r['installed_manifest'] == manifest(), 'Installed source changed; run a new M4C preflight')
+    require(r['installed_manifest'] == manifest(), 'Installed files or rendering selection changed; run a new M4C preflight')
     require(r['generated_hashes'] == generated_hashes(folder), 'M4C scene, camera, filter or cost files changed')
     return folder, r

@@ -37,6 +37,8 @@ class MotionFilter(Node):
         self.publisher=self.create_publisher(TargetBeliefArray,"/sorting/targets",1)
         self.status=self.create_publisher(String,"/sorting/perception/filter_status",1)
         self.create_timer(.005,self.tick,clock=Clock(clock_type=ClockType.STEADY_TIME))
+    def decorate_belief(self,belief):
+        pass
     def reset(self,m):
         if self.track.reset(m.episode_id,ns(m.header.stamp)):
             self.pending.clear();self.held=False;self.last_wall=0.;self.rewind_episode=None;self.accepted_trace=None
@@ -89,7 +91,7 @@ class MotionFilter(Node):
             lead=min(self.c["prediction_lead_s"],self.c["maximum_prediction_horizon_s"])
             x,p=forecast(self.track.x,self.track.p,lead,self.c);b.prediction_time=stamp(self.track.stamp_ns+round(lead*1e9))
             b.prediction_state=x.tolist();b.prediction_covariance=p.reshape(-1).tolist()
-            b.pose_prior="supported horizontal tray; known handle height/orientation";message.targets=[b]
+            b.pose_prior="supported horizontal tray; known handle height/orientation";self.decorate_belief(b);message.targets=[b]
         signature=(message.episode_id,self.track.track_id,self.track.stamp_ns, bool(message.targets and message.targets[0].valid),self.held)
         if signature!=getattr(self,"publish_signature",None):
             trace=getattr(self,'accepted_trace',None) if message.targets else None

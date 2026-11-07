@@ -1,0 +1,6 @@
+<library path="sorting_traced_camera">
+  <class name="sorting_simulation/TracedCameraPlugin" type="sorting_simulation::TracedCameraPlugin"
+         base_class_type="mujoco_ros2_control_plugins::MuJoCoROS2ControlPluginBase">
+    <description>Project-owned 0.1.2 camera with coherent snapshot and camera-side timing records for M4C.</description>
+  </class>
+</library>

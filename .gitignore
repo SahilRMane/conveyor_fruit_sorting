@@ -32,3 +32,6 @@ __pycache__/
 
 # Upstream clone; the revision is in dependencies.repos.
 /third_party/mujoco_menagerie/
+
+# Local simulator log.
+/MUJOCO_LOG.TXT

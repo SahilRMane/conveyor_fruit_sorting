@@ -140,7 +140,7 @@ class MovingInspectionExecutor(ClassInspectionExecutor):
         self.create_subscription(TargetBeliefArray,'/sorting/m4c/targets',self.receive_targets,1)
         for topic in ('/sorting/perception/camera_status','/sorting/m4c/filter_status'):
             self.create_subscription(String,topic,lambda message,t=topic:self.receive_pipeline_status(t,message),1)
-        for stage,topic in (('localizer','/sorting/perception/localizer_timing'),('filter','/sorting/m4c/filter_timing')):
+        for stage,topic in (('localizer','/sorting/perception/localizer_timing'),('filter','/sorting/m4c/filter_timing'),('camera','/sorting/m4c/camera_side_timing')):
             self.create_subscription(String,topic,lambda message,s=stage:self.receive_upstream_trace(s,message),
                                      QoSProfile(depth=64,reliability=ReliabilityPolicy.BEST_EFFORT))
         self.decisions=self.create_publisher(Decision,'/sorting/m4c/decisions',1)
@@ -158,7 +158,7 @@ class MovingInspectionExecutor(ClassInspectionExecutor):
     def check_publishers(self):
         topics=('/clock','/joint_states','/sorting/episode','/sorting/arm/owner_state',
                 '/camera/overhead/image_raw','/camera/wrist/image_raw','/sorting/m4c/targets',
-                '/sorting/perception/localizer_timing','/sorting/m4c/filter_timing')
+                '/sorting/perception/localizer_timing','/sorting/m4c/filter_timing','/sorting/m4c/camera_side_timing')
         self.publisher_diagnostic={topic:[dict(node=i.node_name,namespace=i.node_namespace)
             for i in self.get_publishers_info_by_topic(topic)] for topic in topics}
         bad={topic:items for topic,items in self.publisher_diagnostic.items() if len(items)!=1}

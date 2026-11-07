@@ -344,6 +344,9 @@ class InspectionExecutor(Node):
         self.events.append(dict(state='SETTLED', pose=name, enter_ns=self.now(), position_error_m=error,
                                 orientation_error_rad=angle))
 
+    def save_capture_image(self, path, rgb):
+        return cv2.imwrite(str(path), cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR))
+
     def capture(self, name, output):
         barrier, samples, last = self.now(), [], 0
         self.events.append(dict(state='CAPTURE', pose=name, enter_ns=barrier))
@@ -359,6 +362,7 @@ class InspectionExecutor(Node):
                 self.pending = None
                 return False
             try:
+                processing_begin = time.monotonic()
                 info = self.info.get(capture)
                 if info is None:
                     raise LookupError('matching_camera_info_pending')
@@ -387,8 +391,12 @@ class InspectionExecutor(Node):
                 self.pending = None
                 return False
             last, self.pending = capture, None
+            processing_wall_s = time.monotonic()-processing_begin
+            evidence_begin = time.monotonic()
             if not samples:
-                cv2.imwrite(str(output/f'{name}-{capture}.png'), cv2.cvtColor(rgb, cv2.COLOR_RGB2BGR))
+                self.save_capture_image(output/f'{name}-{capture}.png', rgb)
+            self.events.append(dict(state='CAPTURE_WORK', pose=name, capture_ns=capture,
+                processing_wall_s=processing_wall_s, evidence_wall_s=time.monotonic()-evidence_begin))
             samples.append(result)
             return len(samples) >= self.c['samples_per_pose']
 

@@ -48,6 +48,9 @@ def main():
            physical_pickup_permitted=False,output_directory=str(out))
     try:
         c=config();cc=classifier_config()
+        import xml.etree.ElementTree as ET
+        require(ET.parse(share('mujoco_ros2_control_plugins')/'package.xml').findtext('version')=='0.1.2',
+                'Camera trace requires the validated mujoco_ros2_control_plugins version 0.1.2')
         r['timing_budget']=timing_budget(c)
         require(c['overhead_start_maximum_capture_age_s']+1./c['camera_rate_hz']<c['maximum_capture_age_s'],
                 'Overhead startup does not reserve a complete camera period')
@@ -67,6 +70,7 @@ def main():
         (out/'cameras.yaml').write_text(yaml.safe_dump(cameras))
         plugins=yaml.safe_load((share('sorting_simulation')/'config/camera_plugins_m3d.yaml').read_text())
         camera=plugins['/**']['ros__parameters']['mujoco_plugins']['camera_plugin']
+        camera['type']='sorting_simulation/TracedCameraPlugin'
         camera['camera_publish_rate']=c['camera_rate_hz'];camera['overhead']['policy']='streaming'
         (out/'camera_plugins.yaml').write_text(yaml.safe_dump(plugins))
         fc=yaml.safe_load((share('sorting_perception')/'config/m3b_filter.yaml').read_text())
@@ -78,6 +82,14 @@ def main():
                             str(out/'m4b/m4a/native/views.yaml'),str(share('sorting_supervisor')/'config/m4c.yaml'),str(out/'native')],
                            stdout=log,stderr=subprocess.STDOUT,check=True,timeout=180)
         native=check_native(out/'native',c,fc,costs['upper_sim_s'])
+        with (out/'camera-side.log').open('w') as log:
+            subprocess.run([str(executable('sorting_simulation','verify_camera_trace')),paths['red_partial:upstream'],
+                str(out/'camera-side-check.json')],stdout=log,stderr=subprocess.STDOUT,check=True,timeout=60)
+        camera_side=json.loads((out/'camera-side-check.json').read_text())
+        require(camera_side.get('status')=='PASS' and camera_side.get('parity_frames')==8 and camera_side.get('worker_context') is True,
+                'Camera-side RGB/depth parity, worker EGL or snapshot isolation failed')
+        if os.environ.get('SORTING_RENDER_BACKEND')=='nvidia':
+            require('NVIDIA' in camera_side.get('gl_vendor',''),'Preflight did not use the requested NVIDIA renderer')
         with (out/'collision.log').open('w') as log:
             subprocess.run([str(executable('sorting_supervisor','verify_m4a_scene')),str(out/'m4b/m4a/panda.urdf'),
                 str(out/'m4b/m4a/panda.srdf'),str(out/'m4b/m4a/static-scene.cdr'),str(out/'native/probe.yaml'),
@@ -85,7 +97,7 @@ def main():
         # Resolve the model for every launch scene, including the late-arrival case.
         for scene in paths.values():require(str(scene) in robot_parameters(Path(scene))['robot_description'],'M4C model path was not installed')
         r.update(scene_paths=paths,launch_check=launch_check(out,dict(scene_paths=paths)),native=native,
-                 collision_check=json.loads((out/'collision-check.json').read_text()),measured_costs=costs,
+                 collision_check=json.loads((out/'collision-check.json').read_text()),camera_side_check=camera_side,measured_costs=costs,
                  camera_rate_hz=c['camera_rate_hz'],belt_speed_m_s=c['belt_speed_m_s'],
                  scope='Upstream moving inspection, overhead continuity, capture/track binding and deadline proposals only',
                  installed_manifest=manifest(),generated_hashes=generated_hashes(out),status='PASS')

@@ -23,7 +23,7 @@ RUN_ROOT="$PWD/results/run-$(date +%Y%m%d-%H%M%S-%N)"
 mkdir -p "$RUN_ROOT"
 printf '%s\n' "$RUN_ROOT" > results/current-run.txt
 
-LIBGL_ALWAYS_SOFTWARE=1 OPENBLAS_NUM_THREADS=1 \
+OPENBLAS_NUM_THREADS=1 \
   ros2 run sorting_perception validate_m3d_files.py \
   --components-only --output-dir "$RUN_ROOT/components"
 
@@ -31,7 +31,7 @@ ros2 run sorting_perception probe_m3d_planning.py \
   --preflight-dir "$RUN_ROOT/components" \
   --output-dir "$RUN_ROOT/planning"
 
-LIBGL_ALWAYS_SOFTWARE=1 OPENBLAS_NUM_THREADS=1 \
+OPENBLAS_NUM_THREADS=1 \
   ros2 run sorting_perception validate_m3d_files.py \
   --output-dir "$RUN_ROOT/preflight"
 ```
@@ -73,7 +73,7 @@ RUN_ROOT="$PWD/results/inspection-$(date +%Y%m%d-%H%M%S-%N)"
 mkdir -p "$RUN_ROOT"
 printf '%s\n' "$RUN_ROOT" > results/current-inspection.txt
 
-LIBGL_ALWAYS_SOFTWARE=1 OPENBLAS_NUM_THREADS=1 \
+OPENBLAS_NUM_THREADS=1 \
   ros2 run sorting_supervisor validate_m4b.py \
   --output-dir "$RUN_ROOT/preflight"
 ```
@@ -127,7 +127,7 @@ Stop the simulator and generate the moving preflight:
 ```bash
 RUN_ROOT="$(cat results/current-inspection.txt)"
 
-LIBGL_ALWAYS_SOFTWARE=1 OPENBLAS_NUM_THREADS=1 \
+OPENBLAS_NUM_THREADS=1 \
   ros2 run sorting_supervisor validate_m4c.py \
   --m4b-results-root "$RUN_ROOT" \
   --output-dir "$RUN_ROOT/moving-preflight"
@@ -138,7 +138,7 @@ Terminal 1:
 ```bash
 RUN_ROOT="$(cat results/current-inspection.txt)"
 
-LIBGL_ALWAYS_SOFTWARE=1 ros2 launch sorting_supervisor panda_m4c.launch.py \
+ros2 launch sorting_supervisor panda_m4c.launch.py \
   preflight_dir:="$RUN_ROOT/moving-preflight" \
   fixture:=red_partial arrival:=upstream headless:=false
 ```
@@ -168,7 +168,7 @@ Use a fresh simulator launch and a new output directory for every run.
 | red_clear | late | red_fruit | deadline |
 
 This workflow validates inspection proposals.
-Timing qualification and autonomous connection to physical sorting remain in development.
+See [Active inspection](ACTIVE_INSPECTION.md) for the physical sorting workflow.
 
 ## Outputs
 

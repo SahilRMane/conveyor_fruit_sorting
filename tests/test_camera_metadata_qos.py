@@ -27,12 +27,27 @@ class QosTests(unittest.TestCase):
         for qos in images:self.assertEqual(qos.reliability,ReliabilityPolicy.BEST_EFFORT);self.assertEqual(qos.depth,image_depth)
         for qos in info:self.assertEqual(qos.reliability,ReliabilityPolicy.RELIABLE);self.assertEqual(qos.depth,64)
     def test_localizer_constructor_uses_reliable_metadata_and_latest_images(self):
-        obj=HandleLocalizer.__new__(HandleLocalizer)
-        obj.create_subscription=Mock();obj.create_publisher=Mock();obj.create_timer=Mock()
-        obj.declare_parameter=Mock();obj.get_parameter=Mock(side_effect=lambda name:SimpleNamespace(value="cameras.yaml" if name=="camera_config" else "m3a.yaml"))
-        with patch("handle_localizer.Node.__init__",return_value=None),patch("handle_localizer.Buffer"),patch("handle_localizer.TransformListener"):
-            HandleLocalizer.__init__(obj)
-        self.check_subscriptions(obj.create_subscription.call_args_list,1)
+        for period in (.01,.002):
+            with self.subTest(period=period):
+                obj=HandleLocalizer.__new__(HandleLocalizer)
+                obj.create_subscription=Mock();obj.create_publisher=Mock();obj.create_timer=Mock()
+                obj.declare_parameter=Mock();obj.get_parameter=Mock(side_effect=lambda name:SimpleNamespace(value={
+                    "camera_config":"cameras.yaml","localization_config":"m3a.yaml","timing_trace":False,"process_period_s":period}[name]))
+                with patch("handle_localizer.Node.__init__",return_value=None),patch("handle_localizer.Buffer"),patch("handle_localizer.TransformListener"):
+                    HandleLocalizer.__init__(obj)
+                self.check_subscriptions(obj.create_subscription.call_args_list,1)
+                self.assertEqual(obj.create_timer.call_args_list[0].args[0],period)
+    def test_localizer_rejects_an_invalid_processing_period(self):
+        for period in (0.,.001,float('nan')):
+            with self.subTest(period=period):
+                obj=HandleLocalizer.__new__(HandleLocalizer)
+                obj.create_subscription=Mock();obj.create_publisher=Mock();obj.create_timer=Mock();obj.declare_parameter=Mock()
+                obj.get_parameter=Mock(side_effect=lambda name:SimpleNamespace(value={
+                    "camera_config":"cameras.yaml","localization_config":"m3a.yaml","timing_trace":False,"process_period_s":period}[name]))
+                with patch("handle_localizer.Node.__init__",return_value=None),patch("handle_localizer.Buffer"),patch("handle_localizer.TransformListener"):
+                    with self.assertRaisesRegex(ValueError,"process period"):
+                        HandleLocalizer.__init__(obj)
+                obj.create_timer.assert_not_called()
     def test_evaluator_constructor_uses_reliable_metadata(self):
         obj=CameraProbe.__new__(CameraProbe);node=Mock()
         with patch("m3a_probe.Probe.__init__",return_value=None),patch("m3a_probe.Buffer"),patch("m3a_probe.TransformListener"),patch("m3a_probe.ResetManager"):

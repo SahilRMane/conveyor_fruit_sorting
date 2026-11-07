@@ -1,6 +1,7 @@
 #pragma once
 // Native offscreen rendering. No ROS participant.
 #include "sorting_simulation/static_motion.hpp"
+#include "sorting_simulation/egl_backend.hpp"
 #include <EGL/egl.h>
 #include <EGL/eglext.h>
 #include <yaml-cpp/yaml.h>
@@ -16,14 +17,15 @@ struct Offscreen {
   mjvScene scene{};mjrContext render{};mjvOption options{};mjvCamera camera{};
   bool ready=false;
   void init(const mjModel* m){
-    display=eglGetPlatformDisplay(EGL_PLATFORM_SURFACELESS_MESA,EGL_DEFAULT_DISPLAY,nullptr);
-    EGLint major,minor;check(eglInitialize(display,&major,&minor),"EGL initialization failed");
+    display=initialize_egl_display().display;
     check(eglBindAPI(EGL_OPENGL_API),"EGL OpenGL binding failed");
     EGLint attributes[]={EGL_SURFACE_TYPE,EGL_PBUFFER_BIT,EGL_RENDERABLE_TYPE,EGL_OPENGL_BIT,EGL_RED_SIZE,8,EGL_GREEN_SIZE,8,EGL_BLUE_SIZE,8,EGL_DEPTH_SIZE,24,EGL_NONE};
     EGLConfig config;EGLint count;check(eglChooseConfig(display,attributes,&config,1,&count)&&count>0,"EGL configuration failed");
     context=eglCreateContext(display,config,EGL_NO_CONTEXT,nullptr);check(context!=EGL_NO_CONTEXT,"EGL context failed");
     EGLint size[]={EGL_WIDTH,1,EGL_HEIGHT,1,EGL_NONE};surface=eglCreatePbufferSurface(display,config,size);
     check(surface!=EGL_NO_SURFACE && eglMakeCurrent(display,surface,surface,context),"EGL offscreen surface failed");
+    const auto backend=render_backend_info();
+    std::clog<<"OpenGL renderer: "<<backend.vendor<<" / "<<backend.renderer<<"\n";
     mjv_defaultScene(&scene);mjr_defaultContext(&render);mjv_defaultOption(&options);mjv_defaultCamera(&camera);
     for(int i=0;i<mjNGROUP;++i)options.sitegroup[i]=0;
     mjv_makeScene(m,&scene,2000);mjr_makeContext(m,&render,mjFONTSCALE_100);mjr_setBuffer(mjFB_OFFSCREEN,&render);ready=true;
@@ -37,7 +39,9 @@ struct Offscreen {
     for(int row=h-1;row>=0;--row)image.write(reinterpret_cast<const char*>(rgb.data()+row*w*3),w*3);
   }
   YAML::Node benchmark(const mjModel* m,mjData* d){
-    YAML::Node out;out["gl_renderer"]=reinterpret_cast<const char*>(glGetString(GL_RENDERER));
+    const auto backend=render_backend_info();
+    YAML::Node out;out["gl_renderer"]=backend.renderer;out["gl_vendor"]=backend.vendor;out["gl_version"]=backend.version;
+    out["render_backend_request"]=render_backend_request();
     out["shadow_map_size"]=m->vis.quality.shadowsize;out["offscreen_samples"]=m->vis.quality.offsamples;
     int shadow_lights=0;for(int i=0;i<m->nlight;++i)shadow_lights+=m->light_castshadow[i]!=0;
     out["shadow_casting_lights"]=shadow_lights;

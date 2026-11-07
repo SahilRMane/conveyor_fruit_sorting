@@ -27,8 +27,9 @@ class SortController(Controller):
         super().__init__(node);self.settings['pregrasp_orientation_tolerance_rad']=.015
         self.configure_stationary_camera_recovery()
         self.wrist=WristObserver(self);SupportWindow(self.s['supported_release'])
-        node.declare_parameter('model_directory',str(Path(get_package_share_directory('sorting_perception'))/'models/m3c_baseline'))
-        model_dir=Path(node.get_parameter('model_directory').value);installed=Path(get_package_share_directory('sorting_perception'))/'models/m3c_baseline'
+        installed=self.classifier_directory()
+        node.declare_parameter('model_directory',str(installed))
+        model_dir=Path(node.get_parameter('model_directory').value)
         self.model_sha=hashlib.sha256((model_dir/'weights.npz').read_bytes()).hexdigest()
         require(self.model_sha==hashlib.sha256((installed/'weights.npz').read_bytes()).hexdigest() and (model_dir/'model.json').read_bytes()==(installed/'model.json').read_bytes(),'Use the installed, preflight-validated model')
         classifier_config=yaml.safe_load((Path(get_package_share_directory('sorting_perception'))/'config/m3c.yaml').read_text())
@@ -36,6 +37,8 @@ class SortController(Controller):
         node.create_subscription(ClassObservation,'/sorting/perception/class_observation',self.class_score,10)
         node.create_subscription(TargetBeliefArray,'/sorting/classified_targets',lambda m:setattr(self,'classified',m),1)
         self.decision=node.create_publisher(Decision,'/sorting/decisions',1);self.place_client=node.create_client(SetCameraPlacement,'/sorting/perception/set_camera_placement')
+    def classifier_directory(self):
+        return Path(get_package_share_directory('sorting_perception'))/'models/m3c_baseline'
     def configure_stationary_camera_recovery(self):
         recovery=self.s['stationary_camera_recovery']
         keys=('resume_max_capture_age_s','maximum_wait_sim_s','maximum_wait_wall_s','maximum_total_wait_wall_s')

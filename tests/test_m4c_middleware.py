@@ -127,7 +127,7 @@ class JazzyCallbackTests(unittest.TestCase):
     def test_real_constructor_uses_info_callback_only_for_traced_overhead(self):
         p=HandleLocalizer.__new__(HandleLocalizer)
         p.create_subscription=Mock();p.create_publisher=Mock();p.create_timer=Mock();p.declare_parameter=Mock()
-        p.get_parameter=Mock(side_effect=lambda name:S(value={'timing_trace':True,'camera_config':'cameras.yaml','localization_config':'m3a.yaml'}[name]))
+        p.get_parameter=Mock(side_effect=lambda name:S(value={'timing_trace':True,'camera_config':'cameras.yaml','localization_config':'m3a.yaml','process_period_s':.01}[name]))
         with patch('handle_localizer.Node.__init__',return_value=None),patch('handle_localizer.Buffer'),patch('handle_localizer.TransformListener'),patch('handle_localizer.get_rmw_implementation_identifier',return_value='rmw_fastrtps_cpp'):
             HandleLocalizer.__init__(p)
         callbacks={call.args[1]:call.args[2] for call in p.create_subscription.call_args_list}

@@ -3,7 +3,7 @@
 A ROS 2 and MuJoCo simulation in which a Franka Panda sorts fruit-bearing trays from a moving conveyor.
 The system combines camera tracking, confidence-based inspection, predictive interception and physical tray handling.
 
-**Stack:** C++ · Python · ROS 2 Jazzy · MuJoCo · MoveIt 2 · ros2_control
+**Stack** C++ · Python · ROS 2 Jazzy · MuJoCo · MoveIt 2 · ros2_control
 
 ## Capabilities
 
@@ -14,6 +14,7 @@ The system combines camera tracking, confidence-based inspection, predictive int
 - Grip, lift and place the tray through physical finger contact.
 - Enforce exclusive ownership of planned, Servo and hold commands.
 - Check contact forces, tray slip, reset state, timestamps and evaluator isolation.
+- Use NVIDIA EGL for native rendering and moving-inspection cameras.
 
 ## System architecture
 
@@ -41,11 +42,14 @@ flowchart LR
 | Classified fixed-view sorting | 20 / 20 nominal sorts across two bins |
 | Covered-fruit rejection | Both class fixtures passed |
 | Stationary active inspection | All six clear, partial and covered fixtures passed |
+| Moving inspection and timing | All seven engineering cases passed |
+| Integrated inspection and physical sorting | 10 / 10 seeded M4 cases |
+| Learned view selection and physical sorting | Two live pilots. Both bins, reset and final HOLD passed. |
 
-These results apply to the documented synthetic scenes and operating conditions.
-The classifier distinguishes synthetic red and green cues.
-It does not yet recognize real fruit types.
-Integrated autonomous inspection and pickup, broader timing qualification and held-out stress evaluation remain in development.
+These results apply to the documented synthetic scenes and speeds.
+The classifier reads red and green cues.
+The learned selector ranks two extra wrist views from a fresh assess image and the available time.
+See [Status](STATUS.md) for the offline and live evaluation scope.
 
 ## Getting started
 
@@ -64,6 +68,7 @@ Integrated autonomous inspection and pickup, broader timing qualification and he
 | `sorting_perception` | Localization, filtering and calibrated classification |
 | `sorting_supervisor` | Inspection execution, confidence policy and deadline checks |
 
+See [GPU rendering](docs/GPU_RENDERING.md) for device selection and measured rendering cost.
 See [Architecture](docs/ARCHITECTURE.md) and [Project scope](PROJECT_PLAN.md) for design details.
 The repository contains the current implementation, model assets and automated tests.
 Generated datasets, execution logs and local development archives are excluded.
@@ -72,4 +77,8 @@ Generated datasets, execution logs and local development archives are excluded.
 
 Project code uses [Apache-2.0](LICENSE).
 Robot assets retain their supplied model licenses.
-Maintainer: [SahilRMane](https://github.com/SahilRMane).
+Maintainer [SahilRMane](https://github.com/SahilRMane).
+
+The `tools/` directory contains the seeded runner, calibration and view-selector code.
+Each tool accepts explicit input and output paths. Run a tool with `--help` to list its inputs.
+Use [Active inspection](docs/ACTIVE_INSPECTION.md) for the live validation sequence.

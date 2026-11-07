@@ -12,8 +12,8 @@ class DeadlinePass(ValueError):
     """Decline this target and cancel any active arm command."""
 
 
-def remaining(snapshot, now_ns, c, filter_config):
-    require(snapshot['valid'] and snapshot['camera_only'] and snapshot['view_id']=='overhead'
+def remaining(snapshot, now_ns, c, filter_config, *, tracking_view="overhead"):
+    require(snapshot['valid'] and snapshot['camera_only'] and snapshot['view_id']==tracking_view
             and snapshot['frame_id']=='world', 'Invalid overhead belief or frame')
     age = (now_ns-snapshot['capture_ns'])/1e9
     require(0 <= age < c['maximum_capture_age_s'],

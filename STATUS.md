@@ -1,27 +1,17 @@
-# Implementation status
+# Project status
 
-## Available
+The simulated Panda tracks moving trays, inspects fruit cues and sorts trays into two bins.
+The pipeline uses capture-time RGB images, MoveIt 2, Cartesian Servo and physical finger contact.
+The supervisor keeps arm command ownership exclusive.
 
-- ROS 2 Jazzy integration with MuJoCo and the Franka Panda.
-- Physical tray grasp, lift, transport, bin placement and repeatable reset.
-- Moving-target prediction and camera-driven interception.
-- Calibrated classification of synthetic red and green cues.
-- Stationary wrist inspection and bounded moving-inspection proposals.
-- Exclusive command ownership, collision checks and contact-based placement.
-- Automated component tests and native and live simulation validation tools.
+| Checkpoint | Recorded scope |
+| --- | --- |
+| M4 integration | 10 of 10 seeded cases passed at 1 mm/s, with direct sorts, inspection sorts and passes |
+| M5 offline selector | 192 held-out cases per deadline window. In the widest window, the learned selector made 144 correct accepts and the fixed-left policy made 96. Both made zero wrong accepts. |
+| M5 live inspection | Left, right and late cases passed with the frozen selector |
+| M5 physical sorting | The left-view pilot sorted to bin A. The right-view pilot sorted to bin B. Both passed reset and ended in HOLD with zero command overlap. |
+| M5 seeded selector | 11-case runner available. Visible probes passed green partial sorting and red covered tray exit. |
 
-## Evaluation scope
-
-Fixed-view camera sorting is validated in the nominal synthetic scene at 0.03 m/s.
-Moving active-inspection proposals use a separate 0.001 m/s engineering configuration.
-The active-inspection workflow does not yet authorize physical pickup.
-Recorded test counts and their limits are listed in [Validation](docs/VALIDATION.md).
-
-## Planned
-
-- Complete timing qualification for moving active inspection.
-- Integrate autonomous inspect, physical pick and pass execution.
-- Evaluate calibration, fusion, additional views and learned view selection.
-- Compare predictive control and recovery behaviour on held-out episodes.
-- Add MobileNetV3 fruit-type recognition after the core evaluation.
-- Evaluate a local vision-language-action policy as an optional extension.
+These results use simulated trays with red and green cues.
+The current code includes a two-view selector, independent evaluation and NVIDIA camera rendering.
+The source tree includes the benchmark code. Run reports and trained selector files are generated locally.

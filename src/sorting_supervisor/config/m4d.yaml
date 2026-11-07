@@ -1,0 +1,11 @@
+checkpoint: M4D.2
+scope: camera inspection followed by physical moving pickup and bin placement
+maximum_route_age_sim_s: 30.0
+moving_pregrasp_duration_s: 2.0
+moving_pregrasp_stable_s: 0.2
+moving_pregrasp_timeout_wall_s: 8.0
+maximum_assess_entry_error_m: 0.006
+maximum_episode_wall_s: 420.0
+maximum_handoff_wall_s: 0.5
+wrench_tf_wait_s: 0.05
+maximum_wrench_tf_wait_total_s: 0.2

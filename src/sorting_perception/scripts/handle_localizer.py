@@ -30,6 +30,7 @@ class HandleLocalizer(Node):
         self.declare_parameter("camera_config","cameras.yaml")
         self.declare_parameter("localization_config","m3a.yaml")
         self.declare_parameter("timing_trace",False)
+        self.declare_parameter("process_period_s",0.01)
         self.timing_trace=(self.create_publisher(String,"/sorting/perception/localizer_timing",QoSProfile(depth=64,reliability=ReliabilityPolicy.BEST_EFFORT))
                            if self.get_parameter("timing_trace").value is True else None)
         self.image_trace={};self.info_times={}
@@ -54,7 +55,9 @@ class HandleLocalizer(Node):
             self.create_subscription(CameraInfo,f"/camera/{view}/camera_info",lambda m,v=view:self.camera_info(v,m),metadata_qos)
         self.status=self.create_publisher(String,"/sorting/perception/camera_status",1)
         wall=Clock(clock_type=ClockType.STEADY_TIME)
-        self.create_timer(0.01,self.process,clock=wall);self.create_timer(0.5,self.publish_status,clock=wall)
+        period=self.get_parameter("process_period_s").value
+        if not .002<=period<=.01:raise ValueError("Localizer process period must be 2 to 10 ms")
+        self.create_timer(period,self.process,clock=wall);self.create_timer(0.5,self.publish_status,clock=wall)
         self.last_clock_ns=0;cv2.setNumThreads(1)
 
     def epoch(self,message):

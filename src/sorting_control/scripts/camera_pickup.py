@@ -55,7 +55,7 @@ class Controller:
         self.input_enabled=False;self.input_epoch=0;self.input_deadline=0;self.command_function=None;self.belt_speed=0.
         self.target_required=True;self.grip_candidate=False;self.bound_track=None;self.velocity_window=VelocityWindow()
         self.trace=[];self.closure_proof=None;self.closure_trace=[];self.tracking_start=0;self.motion_lease=0;self.last_tracking={};self.events=[];self.result={};self.maximum_joint_speed=0.;self.maximum_joint_step=0.
-        self.buffer=Buffer(cache_time=Duration(seconds=20.));self.listener=TransformListener(self.buffer,node)
+        self.buffer,self.listener=self.transform_support(node)
         durable=QoSProfile(depth=1,reliability=ReliabilityPolicy.RELIABLE,durability=DurabilityPolicy.TRANSIENT_LOCAL)
         node.create_subscription(CameraEpoch,"/sorting/episode",self.receive_epoch,durable)
         node.create_subscription(TargetBeliefArray,"/sorting/targets",self.receive_belief,1)
@@ -72,8 +72,8 @@ class Controller:
         self.scene_clients=[node.create_client(GetPlanningScene,p) for p in ("/get_planning_scene","/m2b_planner/get_planning_scene")]
         self.contact_service=node.create_client(SetHandleContact,"/sorting/perception/set_handle_contact")
         self.grasp_service=node.create_client(SetEstimatedGrasp,"/sorting/perception/set_estimated_grasp")
-        self.publisher=node.create_publisher(ArmServoCommand,"/sorting/arm/servo_command",1)
-        self.belt=node.create_publisher(Float64,"/sorting/conveyor_command",1)
+        self.publisher=self.command_publisher(node)
+        self.belt=self.belt_publisher(node)
         self.state_pub=node.create_publisher(String,"/sorting/control/pickup_state",1)
         self.result_pub=node.create_publisher(String,"/sorting/control/pickup_result",durable)
         node.create_service(StartCameraPickup,"/sorting/control/start_camera_pickup",self.start)
@@ -81,6 +81,13 @@ class Controller:
         wall=Clock(clock_type=ClockType.STEADY_TIME)
         node.create_timer(.02,self.send,clock=wall);node.create_timer(.1,self.publish_state,clock=wall)
         node.create_timer(.1,self.send_belt,clock=wall)
+    def transform_support(self,node):
+        buffer=Buffer(cache_time=Duration(seconds=20.))
+        return buffer,TransformListener(buffer,node)
+    def command_publisher(self,node):
+        return node.create_publisher(ArmServoCommand,"/sorting/arm/servo_command",1)
+    def belt_publisher(self,node):
+        return node.create_publisher(Float64,"/sorting/conveyor_command",1)
     def now_ns(self):return self.node.get_clock().now().nanoseconds
     def reset_joint_guard(self):
         # Compare samples within one trial. Reset motion occurs while inactive.
@@ -315,6 +322,18 @@ class Controller:
             end=time.monotonic()+5.
             while not committed():require(time.monotonic()<end,"Camera contact allowance not committed");self.wait_sim(.05)
     def before_tracking(self):pass
+    def prepare_pregrasp(self,folder,result):
+        self.set_phase("pregrasp");target,_,_=self.target()
+        pre=[target[0],target[1],self.fc["fixed_handle_z_m"]+.1029+.06];orientation=self.settings["grasp_quaternion_xyzw"]
+        result["pregrasp_plan"]=self.execute_plan(pre,orientation,folder,"camera-pregrasp")
+        def camera_ready():
+            try:
+                x,_,_=self.target()
+                return self.scene.get("valid") and np.linalg.norm(x[:2]-np.asarray(pre)[:2])<.002
+            except (ValueError,RuntimeError):return False
+        self.until(camera_ready,10.)
+        result["pregrasp_refinement"]=self.refine_pose(pre,orientation);result["checks"]["camera_pregrasp"]="PASS"
+        return pre,orientation
     def pickup(self,folder):
         if not self.active:self.reset_joint_guard()
         self.active=True;self.cleanup=False;self.abort=False;self.target_required=True;self.grip_candidate=False
@@ -329,16 +348,7 @@ class Controller:
         require(len(parameters)==3 and all(v.type==ParameterType.PARAMETER_BOOL and v.bool_value is False for v in parameters[:2]) and
             parameters[2].type==ParameterType.PARAMETER_STRING and parameters[2].string_value=="sorting_control/PlanningOnlyControllers","MoveIt execution must remain disabled with the planning-only controller manager")
         self.until(self.hand.server_is_ready)
-        self.set_phase("pregrasp");target,_,_=self.target()
-        pre=[target[0],target[1],self.fc["fixed_handle_z_m"]+.1029+.06];orientation=self.settings["grasp_quaternion_xyzw"]
-        result["pregrasp_plan"]=self.execute_plan(pre,orientation,folder,"camera-pregrasp")
-        def camera_ready():
-            try:
-                x,_,_=self.target()
-                return self.scene.get("valid") and np.linalg.norm(x[:2]-np.asarray(pre)[:2])<.002
-            except (ValueError,RuntimeError):return False
-        self.until(camera_ready,10.)
-        result["pregrasp_refinement"]=self.refine_pose(pre,orientation);result["checks"]["camera_pregrasp"]="PASS"
+        pre,orientation=self.prepare_pregrasp(folder,result)
         self.bound_track=self.belief.track_id;result["motion_track_id"]=self.bound_track
         self.before_tracking()
         self.acquire_mode("SERVO",self.c["motion_lease_s"],1);lease=self.input_deadline

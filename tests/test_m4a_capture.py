@@ -58,6 +58,10 @@ class CapturePairingTests(unittest.TestCase):
         samples, node = self.run_capture([('relative', True, -.02)])
         self.assertEqual(len(samples), 1)
         self.assertEqual(samples[0]['episode_id'], 3)
+        work=next(event for event in node.events if event['state']=='CAPTURE_WORK')
+        self.assertEqual(work['capture_ns'],samples[0]['capture_ns'])
+        self.assertGreaterEqual(work['processing_wall_s'],0.)
+        self.assertGreaterEqual(work['evidence_wall_s'],0.)
 
     def test_pre_motion_capture_never_counted(self):
         samples, node = self.run_capture([(9_999_999_999, True, 0.), ('relative', True, -.02)])

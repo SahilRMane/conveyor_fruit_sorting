@@ -15,8 +15,8 @@ Configure rosdep before resolving project dependencies.
 ```bash
 mkdir -p ~/Projects
 cd ~/Projects
-git clone https://github.com/SahilRMane/conveyor_sorting_ws.git
-cd conveyor_sorting_ws
+git clone https://github.com/SahilRMane/conveyor_fruit_sorting.git
+cd conveyor_fruit_sorting
 
 source /opt/ros/jazzy/setup.bash
 rosdep install --from-paths src --ignore-src -r -y
@@ -48,8 +48,12 @@ cd ~/Projects/conveyor_sorting_ws
 source /opt/ros/jazzy/setup.bash
 source install/setup.bash
 export ROS_DOMAIN_ID=173
+unset LIBGL_ALWAYS_SOFTWARE MESA_LOADER_DRIVER_OVERRIDE __EGL_VENDOR_LIBRARY_FILENAMES
+export SORTING_RENDER_BACKEND=nvidia
 ```
 
 Run one simulator launch at a time.
 Rebuild and generate a fresh preflight after a source or environment change.
 The environment inventory records versions. It is not a complete lockfile.
+
+Read [GPU rendering](GPU_RENDERING.md) for device selection and the verified rendering scope.

@@ -1,0 +1,18 @@
+{
+  "upstream": "https://github.com/ros-controls/mujoco_ros2_control",
+  "version": "0.1.2",
+  "license": "Apache-2.0",
+  "source_files": {
+    "mujoco_ros2_control_plugins/src/camera_plugin.cpp": "70c79ed5deac3cec663c1d2cd1ee917c029d2f1562f6f3a6b33513ab4a43418d",
+    "mujoco_ros2_control_plugins/src/camera_plugin.hpp": "e9b1f72e4f9cef107ec038863eece71cdd78f7afadcbfe73f1e390f66dd2b368",
+    "LICENSE": "10df721a4406adc5fc3024b9cefc6f62345dda19a28b7d842cc16ee470c6c198"
+  },
+  "modifications": [
+    "Project-owned plugin identity",
+    "Camera-side stage timestamps and diagnostic publisher",
+    "Worker-private snapshot copy and locked render selection",
+    "Reset metadata and deterministic cleanup",
+    "Shared render/format helper for node-free payload parity verification",
+    "Worker-owned EGL context and explicit NVIDIA device selection"
+  ]
+}
